@@ -1,4 +1,4 @@
-package in.aorder.restaurant.model;
+package in.aorder.restaurant.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,11 +14,11 @@ import javax.persistence.*;
 public class RestaurantTable extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private String number;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 

@@ -1,4 +1,4 @@
-package in.aorder.restaurant.model;
+package in.aorder.restaurant.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +13,14 @@ import javax.persistence.*;
 @Table(name = "food_court_restaurant")
 public class FoodCourtRestaurant extends BaseEntity {
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @Id
+    private Integer id;
+
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "food_court_id", nullable = false)
     private FoodCourt foodCourt;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 

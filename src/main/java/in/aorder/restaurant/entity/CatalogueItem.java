@@ -1,4 +1,4 @@
-package in.aorder.restaurant.model;
+package in.aorder.restaurant.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class CatalogueItem extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -30,7 +30,7 @@ public class CatalogueItem extends BaseEntity {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 

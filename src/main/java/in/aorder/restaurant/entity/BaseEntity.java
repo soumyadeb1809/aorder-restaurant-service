@@ -1,4 +1,4 @@
-package in.aorder.restaurant.model;
+package in.aorder.restaurant.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +15,12 @@ import java.util.Date;
 public class BaseEntity {
 
     @Column(name = "create_time", nullable = false)
-    private Date createTime;
+    private Date createTime = new Date();
 
     @Column(name = "update_time", nullable = false)
-    private Date updateTime;
+    private Date updateTime = new Date();
 
     @Column(name = "deleted", nullable = false)
-    private Boolean deleted;
+    private Boolean deleted = false;
 
 }
