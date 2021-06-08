@@ -6,6 +6,7 @@ import in.aorder.restaurant.entity.Restaurant;
 import in.aorder.restaurant.repository.RestaurantRepository;
 import in.aorder.restaurant.service.RestaurantService;
 import in.aorder.restaurant.util.DtoFactory;
+import in.aorder.restaurant.util.EntityUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = new Restaurant();
 
         try {
-            populate(restaurant, request);
-
+            EntityUtil.populate(restaurant, request);
             restaurantRepo.save(restaurant);
         }
         catch (Exception e) {
-            LOGGER.error("Error: ", e);
+            LOGGER.error("Error in creating restaurant: ", e);
         }
 
         return restaurant.getId();
@@ -53,24 +53,10 @@ public class RestaurantServiceImpl implements RestaurantService {
             restaurantEntries.forEach(restaurant -> restaurants.add(DtoFactory.createRestaurantDto(restaurant)));
         }
         catch (Exception e) {
-            LOGGER.error("Error: ", e);
+            LOGGER.error("Error in fetching restaurants: ", e);
         }
 
         return restaurants;
-    }
-
-
-    /**
-     * Helper method to populate restaurant instance with the request.
-     *
-     * @param restaurant Restaurant Entity
-     * @param request CreateRestaurantRequest dto
-     */
-    private void populate(Restaurant restaurant, CreateRestaurantRequest request) {
-        restaurant.setName(request.getName());
-        restaurant.setDescription(request.getDescription());
-        restaurant.setLogoPath(request.getLogoPath());
-        restaurant.setLocationId(request.getLocationId());
     }
 
 }

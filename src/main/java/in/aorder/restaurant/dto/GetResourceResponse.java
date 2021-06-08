@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateRestaurantResponse extends BaseResponse {
-    private Integer id;
+public class GetResourceResponse <T> extends BaseResponse {
+    private List<T> data;
 }

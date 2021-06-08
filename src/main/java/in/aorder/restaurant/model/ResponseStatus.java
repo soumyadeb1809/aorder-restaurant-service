@@ -1,5 +1,6 @@
 package in.aorder.restaurant.model;
 
-public enum ResponseStatus {
-    SUCCESS, FAILED
+public class ResponseStatus {
+    public static final String SUCCESS = "success";
+    public static final String FAILED = "failed";
 }

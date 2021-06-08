@@ -16,7 +16,7 @@ public interface RestaurantService {
     Integer createRestaurant(CreateRestaurantRequest request);
 
     /**
-     * Method to get all restaurants with the given filters and criteria.
+     * Service to get all restaurants with the given filters and criteria.
      *
      * @return restaurants list of RestaurantDto
      */

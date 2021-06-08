@@ -1,8 +1,8 @@
 package in.aorder.restaurant.controller;
 
 import in.aorder.restaurant.dto.CreateRestaurantRequest;
-import in.aorder.restaurant.dto.CreateRestaurantResponse;
-import in.aorder.restaurant.dto.GetRestaurantResponse;
+import in.aorder.restaurant.dto.CreateResourceResponse;
+import in.aorder.restaurant.dto.GetResourceResponse;
 import in.aorder.restaurant.dto.RestaurantDto;
 import in.aorder.restaurant.model.ResponseStatus;
 import in.aorder.restaurant.service.RestaurantService;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/restaurants")
 public class RestaurantController {
 
     private static final Logger LOGGER = LogManager.getLogger(RestaurantController.class);
@@ -24,35 +25,35 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
 
-    @GetMapping("/restaurants")
-    public ResponseEntity<GetRestaurantResponse> getRestaurant() {
-
-        List<RestaurantDto> restaurants = restaurantService.getRestaurant();
-        GetRestaurantResponse response = new GetRestaurantResponse();
-        response.setRestaurants(restaurants);
-        response.setStatus(ResponseStatus.SUCCESS.toString());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @PostMapping("/restaurants")
-    public ResponseEntity<CreateRestaurantResponse> createRestaurant(
+    @PostMapping
+    public CreateResourceResponse createRestaurant(
             @RequestBody CreateRestaurantRequest request
     ) {
 
         Integer id = restaurantService.createRestaurant(request);
 
-        CreateRestaurantResponse response = new CreateRestaurantResponse();
+        CreateResourceResponse response = new CreateResourceResponse();
         response.setId(id);
 
         if(id != null) {
-            response.setStatus(ResponseStatus.SUCCESS.toString());
+            response.setStatus(ResponseStatus.SUCCESS);
         }
         else {
-            response.setStatus(ResponseStatus.FAILED.toString());
+            response.setStatus(ResponseStatus.FAILED);
         }
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping
+    public GetResourceResponse<RestaurantDto> getRestaurant() {
+
+        List<RestaurantDto> restaurants = restaurantService.getRestaurant();
+        GetResourceResponse<RestaurantDto> response = new GetResourceResponse<>();
+        response.setData(restaurants);
+        response.setStatus(ResponseStatus.SUCCESS);
+
+        return response;
     }
 
     @PutMapping("/restaurants")
