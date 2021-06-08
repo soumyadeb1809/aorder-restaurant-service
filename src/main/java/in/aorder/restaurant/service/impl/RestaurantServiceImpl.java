@@ -6,6 +6,8 @@ import in.aorder.restaurant.entity.Restaurant;
 import in.aorder.restaurant.repository.RestaurantRepository;
 import in.aorder.restaurant.service.RestaurantService;
 import in.aorder.restaurant.util.DtoFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.List;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
+
+    private static final Logger LOGGER = LogManager.getLogger(RestaurantServiceImpl.class);
 
     @Autowired
     private RestaurantRepository restaurantRepo;
@@ -32,7 +36,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             restaurantRepo.save(restaurant);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error: ", e);
         }
 
         return restaurant.getId();
@@ -43,9 +47,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<RestaurantDto> getRestaurant() {
         List<RestaurantDto> restaurants = new ArrayList<>();
 
-        List<Restaurant> restaurantEntries = restaurantRepo.findAll();
+        try {
+            List<Restaurant> restaurantEntries = restaurantRepo.findAll();
 
-        restaurantEntries.forEach(restaurant -> restaurants.add(DtoFactory.createRestaurantDto(restaurant)));
+            restaurantEntries.forEach(restaurant -> restaurants.add(DtoFactory.createRestaurantDto(restaurant)));
+        }
+        catch (Exception e) {
+            LOGGER.error("Error: ", e);
+        }
 
         return restaurants;
     }
