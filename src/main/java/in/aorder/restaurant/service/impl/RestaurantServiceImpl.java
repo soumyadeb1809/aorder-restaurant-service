@@ -1,13 +1,17 @@
 package in.aorder.restaurant.service.impl;
 
 import in.aorder.restaurant.dto.CreateRestaurantRequest;
+import in.aorder.restaurant.dto.RestaurantDto;
 import in.aorder.restaurant.entity.Restaurant;
 import in.aorder.restaurant.repository.RestaurantRepository;
 import in.aorder.restaurant.service.RestaurantService;
+import in.aorder.restaurant.util.DtoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -32,6 +36,18 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         return restaurant.getId();
+    }
+
+
+    @Override
+    public List<RestaurantDto> getRestaurant() {
+        List<RestaurantDto> restaurants = new ArrayList<>();
+
+        List<Restaurant> restaurantEntries = restaurantRepo.findAll();
+
+        restaurantEntries.forEach(restaurant -> restaurants.add(DtoFactory.createRestaurantDto(restaurant)));
+
+        return restaurants;
     }
 
 

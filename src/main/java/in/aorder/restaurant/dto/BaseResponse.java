@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateRestaurantResponse extends BaseResponse {
-    private Integer id;
+public class BaseResponse {
+    private String status;
 }
