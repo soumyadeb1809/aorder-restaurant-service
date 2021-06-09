@@ -29,7 +29,7 @@ public class LocationController {
 
         if(id != null) {
             response.setId(id);
-            response.setStatus(in.aorder.restaurant.model.ResponseStatus.SUCCESS);
+            response.setStatus(ResponseStatus.SUCCESS);
         }
         else {
             response.setStatus(ResponseStatus.FAILED);
