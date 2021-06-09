@@ -45,7 +45,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 
     @Override
-    public List<RestaurantDto> getRestaurant() {
+    public List<RestaurantDto> getRestaurants() {
         List<RestaurantDto> restaurants = new ArrayList<>();
 
         try {

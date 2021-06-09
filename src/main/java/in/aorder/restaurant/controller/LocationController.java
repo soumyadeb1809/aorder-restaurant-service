@@ -1,7 +1,7 @@
 package in.aorder.restaurant.controller;
 
 import in.aorder.restaurant.dto.*;
-import in.aorder.restaurant.model.ResponseStatus;
+import in.aorder.restaurant.model.ResponseMessage;
 import in.aorder.restaurant.service.LocationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,35 +29,35 @@ public class LocationController {
 
         if(id != null) {
             response.setId(id);
-            response.setStatus(ResponseStatus.SUCCESS);
+            response.setMessage(ResponseMessage.SUCCESS);
         }
         else {
-            response.setStatus(ResponseStatus.FAILED);
+            response.setMessage(ResponseMessage.FAILED);
         }
 
         return response;
     }
 
     @GetMapping
-    public GenericResourceListResponse<LocationDto> getLocation() {
-        GenericResourceListResponse<LocationDto> response = new GenericResourceListResponse<>();
+    public ResourceListResponse<LocationDto> getLocation() {
+        ResourceListResponse<LocationDto> response = new ResourceListResponse<>();
 
-        List<LocationDto> locations = locationService.getLocation();
+        List<LocationDto> locations = locationService.getLocations();
         response.setData(locations);
-        response.setStatus(ResponseStatus.SUCCESS);
+        response.setMessage(ResponseMessage.SUCCESS);
 
         return response;
     }
 
     @GetMapping("/{id}")
-    public GenericResourceResponse<LocationDto> getLocation(
+    public ResourceResponse<LocationDto> getLocation(
             @PathVariable Integer id
     ) {
-        GenericResourceResponse<LocationDto> response = new GenericResourceResponse<>();
+        ResourceResponse<LocationDto> response = new ResourceResponse<>();
 
         LocationDto location = locationService.getLocation(id);
         response.setData(location);
-        response.setStatus(ResponseStatus.SUCCESS);
+        response.setMessage(ResponseMessage.SUCCESS);
 
         return response;
     }

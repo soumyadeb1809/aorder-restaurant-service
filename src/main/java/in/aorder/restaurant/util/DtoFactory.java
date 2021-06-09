@@ -1,7 +1,9 @@
 package in.aorder.restaurant.util;
 
+import in.aorder.restaurant.dto.CatalogueCategoryDto;
 import in.aorder.restaurant.dto.LocationDto;
 import in.aorder.restaurant.dto.RestaurantDto;
+import in.aorder.restaurant.entity.CatalogueCategory;
 import in.aorder.restaurant.entity.Location;
 import in.aorder.restaurant.entity.Restaurant;
 
@@ -30,9 +32,8 @@ public class DtoFactory {
         return restaurantDto;
     }
 
-
     /**
-     * Utility method to create LocationDto from LocationDto entity.
+     * Utility method to create LocationDto from Location entity.
      *
      * @param location entity
      * @return locationDto
@@ -47,6 +48,23 @@ public class DtoFactory {
         locationDto.setPin(location.getPin());
 
         return locationDto;
+    }
+
+    /**
+     * Utility method to create CatalogueCategoryDto from CatalogueCategory entity.
+     *
+     * @param category entity
+     * @return categoryDto
+     */
+    public static CatalogueCategoryDto createCatalogueCategoryDto(CatalogueCategory category) {
+        CatalogueCategoryDto categoryDto = new CatalogueCategoryDto();
+
+        categoryDto.setId(category.getId());
+        categoryDto.setName(category.getName());
+        categoryDto.setDescription(category.getDescription());
+        categoryDto.setRestaurantId(category.getRestaurantId());
+
+        return categoryDto;
     }
 
 }

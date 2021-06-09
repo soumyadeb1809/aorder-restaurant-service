@@ -20,7 +20,7 @@ public interface LocationService {
      *
      * @return locations list of LocationDto
      */
-    List<LocationDto> getLocation();
+    List<LocationDto> getLocations();
 
     /**
      * Service to get location with the provided location id.

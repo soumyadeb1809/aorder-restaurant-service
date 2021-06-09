@@ -7,6 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BaseResponse {
-    private String message;
+public class CreateCatalogueCategoryRequest {
+    private String name;
+    private String description;
+    private Integer restaurantId;
 }

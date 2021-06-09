@@ -1,7 +1,7 @@
 package in.aorder.restaurant.controller;
 
 import in.aorder.restaurant.dto.*;
-import in.aorder.restaurant.model.ResponseStatus;
+import in.aorder.restaurant.model.ResponseMessage;
 import in.aorder.restaurant.service.RestaurantService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,40 +31,40 @@ public class RestaurantController {
         response.setId(id);
 
         if(id != null) {
-            response.setStatus(ResponseStatus.SUCCESS);
+            response.setMessage(ResponseMessage.SUCCESS);
         }
         else {
-            response.setStatus(ResponseStatus.FAILED);
+            response.setMessage(ResponseMessage.FAILED);
         }
 
         return response;
     }
 
     @GetMapping
-    public GenericResourceListResponse<RestaurantDto> getRestaurant() {
+    public ResourceListResponse<RestaurantDto> getRestaurant() {
 
-        List<RestaurantDto> restaurants = restaurantService.getRestaurant();
-        GenericResourceListResponse<RestaurantDto> response = new GenericResourceListResponse<>();
+        List<RestaurantDto> restaurants = restaurantService.getRestaurants();
+        ResourceListResponse<RestaurantDto> response = new ResourceListResponse<>();
         response.setData(restaurants);
-        response.setStatus(ResponseStatus.SUCCESS);
+        response.setMessage(ResponseMessage.SUCCESS);
 
         return response;
     }
 
     @GetMapping("/{id}")
-    public GenericResourceResponse<RestaurantDto> getRestaurant(
+    public ResourceResponse<RestaurantDto> getRestaurant(
             @PathVariable Integer id
     ) {
-       GenericResourceResponse<RestaurantDto> response = new GenericResourceResponse<>();
+       ResourceResponse<RestaurantDto> response = new ResourceResponse<>();
 
        RestaurantDto restaurant = restaurantService.getRestaurant(id);
        response.setData(restaurant);
-       response.setStatus(ResponseStatus.SUCCESS);
+       response.setMessage(ResponseMessage.SUCCESS);
 
        return response;
     }
 
-    @PutMapping("/restaurants")
+    @PutMapping
     public String updateRestaurant() {
         return null;
     }

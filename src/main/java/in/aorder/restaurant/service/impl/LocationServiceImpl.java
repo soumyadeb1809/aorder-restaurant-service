@@ -43,7 +43,7 @@ public class LocationServiceImpl implements LocationService {
 
 
     @Override
-    public List<LocationDto> getLocation() {
+    public List<LocationDto> getLocations() {
         List<LocationDto> locations = new ArrayList<>();
 
         try {

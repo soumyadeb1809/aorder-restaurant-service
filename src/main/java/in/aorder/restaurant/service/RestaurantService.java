@@ -20,7 +20,7 @@ public interface RestaurantService {
      *
      * @return restaurants list of RestaurantDto
      */
-    List<RestaurantDto> getRestaurant();
+    List<RestaurantDto> getRestaurants();
 
     /**
      * Service to get restaurant with the given id.

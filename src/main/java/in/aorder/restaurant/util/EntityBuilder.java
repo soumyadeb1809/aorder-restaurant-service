@@ -1,7 +1,9 @@
 package in.aorder.restaurant.util;
 
+import in.aorder.restaurant.dto.CreateCatalogueCategoryRequest;
 import in.aorder.restaurant.dto.CreateLocationRequest;
 import in.aorder.restaurant.dto.CreateRestaurantRequest;
+import in.aorder.restaurant.entity.CatalogueCategory;
 import in.aorder.restaurant.entity.Location;
 import in.aorder.restaurant.entity.Restaurant;
 
@@ -35,6 +37,18 @@ public class EntityBuilder {
         restaurant.setDescription(request.getDescription());
         restaurant.setLogoPath(request.getLogoPath());
         restaurant.setLocationId(request.getLocationId());
+    }
+
+    /**
+     * Utility method to build CatalogueCategory instance with the request dto.
+     *
+     * @param category CatalogueCategory Entity
+     * @param request CreateCatalogueCategoryRequest dto
+     */
+    public static void build(CatalogueCategory category, CreateCatalogueCategoryRequest request) {
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+        category.setRestaurantId(request.getRestaurantId());
     }
 
 }
