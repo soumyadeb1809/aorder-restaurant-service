@@ -1,16 +1,11 @@
 package in.aorder.restaurant.controller;
 
-import in.aorder.restaurant.dto.CreateRestaurantRequest;
-import in.aorder.restaurant.dto.CreateResourceResponse;
-import in.aorder.restaurant.dto.GetResourceResponse;
-import in.aorder.restaurant.dto.RestaurantDto;
+import in.aorder.restaurant.dto.*;
 import in.aorder.restaurant.model.ResponseStatus;
 import in.aorder.restaurant.service.RestaurantService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,14 +41,27 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public GetResourceResponse<RestaurantDto> getRestaurant() {
+    public GenericResourceListResponse<RestaurantDto> getRestaurant() {
 
         List<RestaurantDto> restaurants = restaurantService.getRestaurant();
-        GetResourceResponse<RestaurantDto> response = new GetResourceResponse<>();
+        GenericResourceListResponse<RestaurantDto> response = new GenericResourceListResponse<>();
         response.setData(restaurants);
         response.setStatus(ResponseStatus.SUCCESS);
 
         return response;
+    }
+
+    @GetMapping("/{id}")
+    public GenericResourceResponse<RestaurantDto> getRestaurant(
+            @PathVariable Integer id
+    ) {
+       GenericResourceResponse<RestaurantDto> response = new GenericResourceResponse<>();
+
+       RestaurantDto restaurant = restaurantService.getRestaurant(id);
+       response.setData(restaurant);
+       response.setStatus(ResponseStatus.SUCCESS);
+
+       return response;
     }
 
     @PutMapping("/restaurants")

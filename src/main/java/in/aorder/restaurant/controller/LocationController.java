@@ -1,15 +1,11 @@
 package in.aorder.restaurant.controller;
 
-import in.aorder.restaurant.dto.CreateLocationRequest;
-import in.aorder.restaurant.dto.CreateResourceResponse;
-import in.aorder.restaurant.dto.GetResourceResponse;
-import in.aorder.restaurant.dto.LocationDto;
+import in.aorder.restaurant.dto.*;
 import in.aorder.restaurant.model.ResponseStatus;
 import in.aorder.restaurant.service.LocationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,8 +39,8 @@ public class LocationController {
     }
 
     @GetMapping
-    public GetResourceResponse<LocationDto> getLocation() {
-        GetResourceResponse<LocationDto> response = new GetResourceResponse<>();
+    public GenericResourceListResponse<LocationDto> getLocation() {
+        GenericResourceListResponse<LocationDto> response = new GenericResourceListResponse<>();
 
         List<LocationDto> locations = locationService.getLocation();
         response.setData(locations);
@@ -53,4 +49,16 @@ public class LocationController {
         return response;
     }
 
+    @GetMapping("/{id}")
+    public GenericResourceResponse<LocationDto> getLocation(
+            @PathVariable Integer id
+    ) {
+        GenericResourceResponse<LocationDto> response = new GenericResourceResponse<>();
+
+        LocationDto location = locationService.getLocation(id);
+        response.setData(location);
+        response.setStatus(ResponseStatus.SUCCESS);
+
+        return response;
+    }
 }

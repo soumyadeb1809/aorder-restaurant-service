@@ -4,11 +4,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class GetResourceResponse <T> extends BaseResponse {
-    private List<T> data;
+public class GenericResourceResponse <T> extends BaseResponse {
+    private T data;
 }

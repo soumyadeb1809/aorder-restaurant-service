@@ -21,4 +21,12 @@ public interface LocationService {
      * @return locations list of LocationDto
      */
     List<LocationDto> getLocation();
+
+    /**
+     * Service to get location with the provided location id.
+     *
+     * @param id location id
+     * @return LocationDto for the location
+     */
+    LocationDto getLocation(Integer id);
 }

@@ -6,7 +6,7 @@ import in.aorder.restaurant.entity.Restaurant;
 import in.aorder.restaurant.repository.RestaurantRepository;
 import in.aorder.restaurant.service.RestaurantService;
 import in.aorder.restaurant.util.DtoFactory;
-import in.aorder.restaurant.util.EntityUtil;
+import in.aorder.restaurant.util.EntityBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -32,7 +33,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = new Restaurant();
 
         try {
-            EntityUtil.populate(restaurant, request);
+            EntityBuilder.build(restaurant, request);
             restaurantRepo.save(restaurant);
         }
         catch (Exception e) {
@@ -57,6 +58,24 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         return restaurants;
+    }
+
+    @Override
+    public RestaurantDto getRestaurant(Integer id) {
+        RestaurantDto restaurantDto = null;
+
+        try {
+            Optional<Restaurant> restaurant = restaurantRepo.findById(id);
+
+            if(restaurant.isPresent()) {
+                restaurantDto = DtoFactory.createRestaurantDto(restaurant.get());
+            }
+        }
+        catch (Exception e) {
+            LOGGER.error("Error in fetching restaurant with Id: " + id, e);
+        }
+
+        return restaurantDto;
     }
 
 }

@@ -6,7 +6,7 @@ import in.aorder.restaurant.entity.Location;
 import in.aorder.restaurant.repository.LocationRepository;
 import in.aorder.restaurant.service.LocationService;
 import in.aorder.restaurant.util.DtoFactory;
-import in.aorder.restaurant.util.EntityUtil;
+import in.aorder.restaurant.util.EntityBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -30,7 +31,7 @@ public class LocationServiceImpl implements LocationService {
         Location location = new Location();
 
         try {
-            EntityUtil.populate(location, request);
+            EntityBuilder.build(location, request);
             locationRepo.save(location);
         }
         catch (Exception e) {
@@ -54,5 +55,24 @@ public class LocationServiceImpl implements LocationService {
         }
 
         return locations;
+    }
+
+
+    @Override
+    public LocationDto getLocation(Integer id) {
+
+        LocationDto locationDto = null;
+
+        try {
+            Optional<Location> location = locationRepo.findById(id);
+
+            if(location.isPresent()) {
+                locationDto = DtoFactory.createLocationDto(location.get());
+            }
+        }
+        catch (Exception e) {
+            LOGGER.error("Error in fetching location with ID: " + id, e);
+        }
+        return locationDto;
     }
 }

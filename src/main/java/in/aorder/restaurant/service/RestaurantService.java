@@ -22,4 +22,11 @@ public interface RestaurantService {
      */
     List<RestaurantDto> getRestaurant();
 
+    /**
+     * Service to get restaurant with the given id.
+     *
+     * @return RestaurantDto of the Restaurant
+     */
+    RestaurantDto getRestaurant(Integer id);
+
 }
