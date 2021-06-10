@@ -1,9 +1,12 @@
 package in.aorder.restaurant.service.impl;
 
-import in.aorder.restaurant.dto.CatalogueCategoryDto;
-import in.aorder.restaurant.dto.CreateCatalogueCategoryRequest;
+import in.aorder.restaurant.dto.*;
+import in.aorder.restaurant.entity.Catalogue;
 import in.aorder.restaurant.entity.CatalogueCategory;
+import in.aorder.restaurant.entity.CatalogueItem;
 import in.aorder.restaurant.repository.CatalogueCategoryRepository;
+import in.aorder.restaurant.repository.CatalogueItemRepository;
+import in.aorder.restaurant.repository.CatalogueRepository;
 import in.aorder.restaurant.service.CatalogueService;
 import in.aorder.restaurant.util.DtoFactory;
 import in.aorder.restaurant.util.EntityBuilder;
@@ -23,6 +26,12 @@ public class CatalogueServiceImpl implements CatalogueService {
     @Autowired
     private CatalogueCategoryRepository categoryRepo;
 
+    @Autowired
+    private CatalogueRepository catalogueRepo;
+
+    @Autowired
+    private CatalogueItemRepository catalogueItemRepo;
+
 
     @Override
     public Integer createCategory(CreateCatalogueCategoryRequest request) {
@@ -33,7 +42,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             categoryRepo.save(category);
         }
         catch (Exception e) {
-            LOGGER.error("Error in creating category: ", e);
+            LOGGER.error("Error in creating category", e);
         }
 
         return category.getId();
@@ -54,5 +63,67 @@ public class CatalogueServiceImpl implements CatalogueService {
         }
 
         return catalogueCategories;
+    }
+
+    @Override
+    public Integer createCatalogue(CreateCatalogueRequest request) {
+        Catalogue catalogue = new Catalogue();
+
+        try {
+            EntityBuilder.build(catalogue, request);
+            catalogueRepo.save(catalogue);
+        }
+        catch (Exception e) {
+            LOGGER.error("Error in creating catalogue", e);
+        }
+
+        return catalogue.getId();
+    }
+
+    @Override
+    public List<CatalogueDto> getCatalogues(Integer restaurantId) {
+        List<CatalogueDto> catalogues = new ArrayList<>();
+
+        try {
+            List<Catalogue> catalogueRecords = catalogueRepo.findAll(restaurantId);
+            catalogueRecords.forEach(catalogue -> catalogues.add(DtoFactory.createCatalogueDto(catalogue)));
+        }
+        catch (Exception e) {
+            LOGGER.error("Error in fetching catalogue list for restaurant Id: " + restaurantId, e);
+        }
+
+        return catalogues;
+    }
+
+    @Override
+    public Integer createCatalogueItem(CreateCatalogueItemRequest request) {
+        CatalogueItem catalogueItem = new CatalogueItem();
+
+        try {
+            EntityBuilder.build(catalogueItem, request);
+            catalogueItemRepo.save(catalogueItem);
+        }
+        catch (Exception e) {
+            LOGGER.error("Error in creating catalogue item", e);
+        }
+
+        return catalogueItem.getId();
+    }
+
+    @Override
+    public List<CatalogueItemDto> getCatalogueItems(Integer catalogueId) {
+        List<CatalogueItemDto> catalogueItems = new ArrayList<>();
+
+        try {
+            List<CatalogueItem> catalogueItemRecords = catalogueItemRepo.findAll(catalogueId);
+            catalogueItemRecords.forEach(
+                    catalogueItem -> catalogueItems.add(DtoFactory.createCatalogueItemDto(catalogueItem))
+            );
+        }
+        catch (Exception e) {
+            LOGGER.error("Error in fetching catalogue items for Id: " + catalogueId, e);
+        }
+
+        return catalogueItems;
     }
 }

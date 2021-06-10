@@ -1,11 +1,7 @@
 package in.aorder.restaurant.util;
 
-import in.aorder.restaurant.dto.CatalogueCategoryDto;
-import in.aorder.restaurant.dto.LocationDto;
-import in.aorder.restaurant.dto.RestaurantDto;
-import in.aorder.restaurant.entity.CatalogueCategory;
-import in.aorder.restaurant.entity.Location;
-import in.aorder.restaurant.entity.Restaurant;
+import in.aorder.restaurant.dto.*;
+import in.aorder.restaurant.entity.*;
 
 /**
  * Utility class containing methods to create DTO objects.
@@ -67,4 +63,41 @@ public class DtoFactory {
         return categoryDto;
     }
 
+    /**
+     * Utility method to create CatalogueDto from Catalogue entity.
+     *
+     * @param catalogue entity
+     * @return catalogueDto
+     */
+    public static CatalogueDto createCatalogueDto(Catalogue catalogue) {
+        CatalogueDto catalogueDto = new CatalogueDto();
+
+        catalogueDto.setId(catalogue.getId());
+        catalogueDto.setName(catalogue.getName());
+        catalogueDto.setRestaurantId(catalogue.getRestaurantId());
+
+        return catalogueDto;
+    }
+
+    /**
+     * Utility method to create CatalogueItemDto from CatalogueItem entity.
+     *
+     * @param catalogueItem entity
+     * @return catalogueItemDto
+     */
+    public static CatalogueItemDto createCatalogueItemDto(CatalogueItem catalogueItem) {
+        CatalogueItemDto catalogueItemDto = new CatalogueItemDto();
+
+        catalogueItemDto.setId(catalogueItem.getId());
+        catalogueItemDto.setName(catalogueItem.getName());
+        catalogueItemDto.setDescription(catalogueItem.getDescription());
+        catalogueItemDto.setPrice(catalogueItem.getPrice());
+        catalogueItemDto.setVegan(catalogueItem.getVegan());
+        catalogueItemDto.setVisible(catalogueItem.getVisible());
+        catalogueItemDto.setCatalogueId(catalogueItem.getCatalogueId());
+        catalogueItemDto.setCategoryId(catalogueItem.getCategoryId());
+        catalogueItemDto.setRestaurantId(catalogueItem.getRestaurantId());
+
+        return catalogueItemDto;
+    }
 }

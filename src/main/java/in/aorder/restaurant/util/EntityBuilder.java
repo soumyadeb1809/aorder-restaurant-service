@@ -1,11 +1,7 @@
 package in.aorder.restaurant.util;
 
-import in.aorder.restaurant.dto.CreateCatalogueCategoryRequest;
-import in.aorder.restaurant.dto.CreateLocationRequest;
-import in.aorder.restaurant.dto.CreateRestaurantRequest;
-import in.aorder.restaurant.entity.CatalogueCategory;
-import in.aorder.restaurant.entity.Location;
-import in.aorder.restaurant.entity.Restaurant;
+import in.aorder.restaurant.dto.*;
+import in.aorder.restaurant.entity.*;
 
 /**
  * Class containing utility methods to work with entities.
@@ -49,6 +45,33 @@ public class EntityBuilder {
         category.setName(request.getName());
         category.setDescription(request.getDescription());
         category.setRestaurantId(request.getRestaurantId());
+    }
+
+    /**
+     * Utility method to build Catalogue instance with the request dto.
+     *
+     * @param catalogue Catalogue entity
+     * @param request CreateCatalogueRequest dto
+     */
+    public static void build(Catalogue catalogue, CreateCatalogueRequest request) {
+        catalogue.setName(request.getName());
+        catalogue.setRestaurantId(request.getRestaurantId());
+    }
+
+    /**
+     * Utility method to build CatalogueItem instance with the request dto.
+     *
+     * @param catalogueItem CatalogueItem entity
+     * @param request CreateCatalogueItemRequest dto
+     */
+    public static void build(CatalogueItem catalogueItem, CreateCatalogueItemRequest request) {
+        catalogueItem.setName(request.getName());
+        catalogueItem.setDescription(request.getDescription());
+        catalogueItem.setPrice(request.getPrice());
+        catalogueItem.setVegan(request.getVegan());
+        catalogueItem.setCatalogueId(request.getCatalogueId());
+        catalogueItem.setCategoryId(request.getCategoryId());
+        catalogueItem.setRestaurantId(request.getRestaurantId());
     }
 
 }

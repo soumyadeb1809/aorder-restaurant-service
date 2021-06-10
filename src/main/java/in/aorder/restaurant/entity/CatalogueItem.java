@@ -30,9 +30,16 @@ public class CatalogueItem extends BaseEntity {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant restaurant;
+    @Column(name = "restaurant_id", nullable = false)
+    private Integer restaurantId;
 
+    @Column(name = "catalogue_id", nullable = false)
+    private Integer catalogueId;
+
+    @Column(name = "category_id")
+    private Integer categoryId;
+
+    @Column(name = "visible")
+    private Boolean visible = true;
     
 }

@@ -14,21 +14,14 @@ import javax.persistence.*;
 public class Catalogue extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "item_id", nullable = false)
-    private CatalogueItem item;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant restaurant;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "category_id", nullable = false)
-    private CatalogueCategory category;
-
-    @Column(name = "visible", nullable = false)
-    private Boolean visible;
+    @Column(name = "restaurant_id", nullable = false)
+    private Integer restaurantId;
 
 }
