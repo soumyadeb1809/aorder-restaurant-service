@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    private static final Logger LOGGER = LogManager.getLogger(LocationServiceImpl.class);
+    private static final Logger LOG = LogManager.getLogger(LocationServiceImpl.class);
 
     @Autowired
     private LocationRepository locationRepo;
@@ -37,7 +37,7 @@ public class LocationServiceImpl implements LocationService {
             locationRepo.save(location);
         }
         catch (Exception e) {
-            LOGGER.error("Error in creating location: ", e);
+            LOG.error("Error in creating location: ", e);
         }
 
         return location.getId();
@@ -53,7 +53,7 @@ public class LocationServiceImpl implements LocationService {
             locationEntries.forEach(location -> locations.add(DtoFactory.createLocationDto(location)));
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching locations: ", e);
+            LOG.error("Error in fetching locations: ", e);
         }
 
         return locations;
@@ -72,11 +72,11 @@ public class LocationServiceImpl implements LocationService {
                 locationDto = DtoFactory.createLocationDto(location.get());
             }
             else {
-                LOGGER.info("Location not found with id: " + id);
+                LOG.info("Location not found with id: " + id);
             }
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching location with ID: " + id, e);
+            LOG.error("Error in fetching location with ID: " + id, e);
         }
         return locationDto;
     }
@@ -90,7 +90,7 @@ public class LocationServiceImpl implements LocationService {
             Optional<Location> locationOp = locationRepo.findById(id);
 
             if(!locationOp.isPresent()) {
-                LOGGER.info("Location not found with id: " + id);
+                LOG.info("Location not found with id: " + id);
                 return null;
             }
 
@@ -103,7 +103,7 @@ public class LocationServiceImpl implements LocationService {
             }
         }
         catch (Exception e) {
-            LOGGER.error("Failed to update location Id: " + id, e);
+            LOG.error("Failed to update location Id: " + id, e);
         }
 
         return locationDto;

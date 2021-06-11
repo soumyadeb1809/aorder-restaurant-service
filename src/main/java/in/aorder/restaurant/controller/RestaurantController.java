@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/restaurants")
 public class RestaurantController {
 
-    private static final Logger LOGGER = LogManager.getLogger(RestaurantController.class);
+    private static final Logger LOG = LogManager.getLogger(RestaurantController.class);
 
     @Autowired
     private RestaurantService restaurantService;

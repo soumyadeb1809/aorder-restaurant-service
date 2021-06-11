@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
-    private static final Logger LOGGER = LogManager.getLogger(RestaurantServiceImpl.class);
+    private static final Logger LOG = LogManager.getLogger(RestaurantServiceImpl.class);
 
     @Autowired
     private RestaurantRepository restaurantRepo;
@@ -38,7 +38,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             restaurantRepo.save(restaurant);
         }
         catch (Exception e) {
-            LOGGER.error("Error in creating restaurant: ", e);
+            LOG.error("Error in creating restaurant: ", e);
         }
 
         return restaurant.getId();
@@ -55,7 +55,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             restaurantEntries.forEach(restaurant -> restaurants.add(DtoFactory.createRestaurantDto(restaurant)));
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching restaurants: ", e);
+            LOG.error("Error in fetching restaurants: ", e);
         }
 
         return restaurants;
@@ -72,11 +72,11 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurantDto = DtoFactory.createRestaurantDto(restaurant.get());
             }
             else {
-                LOGGER.info("Restaurant not found with id: " + id);
+                LOG.info("Restaurant not found with id: " + id);
             }
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching restaurant with Id: " + id, e);
+            LOG.error("Error in fetching restaurant with Id: " + id, e);
         }
 
         return restaurantDto;
@@ -90,7 +90,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             Optional<Restaurant> restaurantOp = restaurantRepo.findById(id);
 
             if(!restaurantOp.isPresent()) {
-                LOGGER.info("Restaurant not found with id: " + id);
+                LOG.info("Restaurant not found with id: " + id);
                 return null;
             }
 
@@ -103,7 +103,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             }
         }
         catch (Exception e) {
-            LOGGER.error("Failed to update Restaurant Id: " + id, e);
+            LOG.error("Failed to update Restaurant Id: " + id, e);
         }
 
         return restaurantDto;

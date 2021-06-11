@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/catalogues")
 public class CatalogueController {
 
-    private static final Logger LOGGER = LogManager.getLogger(CatalogueController.class);
+    private static final Logger LOG = LogManager.getLogger(CatalogueController.class);
 
     @Autowired
     private CatalogueService catalogueService;

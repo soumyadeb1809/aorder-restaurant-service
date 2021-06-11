@@ -22,7 +22,7 @@ import java.util.Optional;
 @Service
 public class CatalogueServiceImpl implements CatalogueService {
 
-    private static final Logger LOGGER = LogManager.getLogger(CatalogueServiceImpl.class);
+    private static final Logger LOG = LogManager.getLogger(CatalogueServiceImpl.class);
 
     @Autowired
     private CatalogueCategoryRepository categoryRepo;
@@ -43,7 +43,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             categoryRepo.save(category);
         }
         catch (Exception e) {
-            LOGGER.error("Error in creating category", e);
+            LOG.error("Error in creating category", e);
         }
 
         return category.getId();
@@ -60,7 +60,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             );
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching categories for restaurant Id: " + restaurantId, e);
+            LOG.error("Error in fetching categories for restaurant Id: " + restaurantId, e);
         }
 
         return catalogueCategories;
@@ -74,7 +74,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<CatalogueCategory> categoryOp = categoryRepo.findById(id);
 
             if(!categoryOp.isPresent()) {
-                LOGGER.info("CatalogueCategory not found with id: " + id);
+                LOG.info("CatalogueCategory not found with id: " + id);
                 return null;
             }
 
@@ -87,7 +87,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             }
         }
         catch (Exception e) {
-            LOGGER.error("Failed to update CatalogueCategory Id: " + id, e);
+            LOG.error("Failed to update CatalogueCategory Id: " + id, e);
         }
 
         return categoryDto;
@@ -102,7 +102,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             catalogueRepo.save(catalogue);
         }
         catch (Exception e) {
-            LOGGER.error("Error in creating catalogue", e);
+            LOG.error("Error in creating catalogue", e);
         }
 
         return catalogue.getId();
@@ -117,7 +117,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             catalogueRecords.forEach(catalogue -> catalogues.add(DtoFactory.createCatalogueDto(catalogue)));
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching catalogue list for restaurant Id: " + restaurantId, e);
+            LOG.error("Error in fetching catalogue list for restaurant Id: " + restaurantId, e);
         }
 
         return catalogues;
@@ -131,7 +131,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<Catalogue> catalogueOp = catalogueRepo.findById(id);
 
             if(!catalogueOp.isPresent()) {
-                LOGGER.info("CatalogueCategory not found with id: " + id);
+                LOG.info("CatalogueCategory not found with id: " + id);
                 return null;
             }
 
@@ -144,7 +144,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             }
         }
         catch (Exception e) {
-            LOGGER.error("Failed to update Catalogue Id: " + id, e);
+            LOG.error("Failed to update Catalogue Id: " + id, e);
         }
 
         return catalogueDto;
@@ -159,7 +159,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             catalogueItemRepo.save(catalogueItem);
         }
         catch (Exception e) {
-            LOGGER.error("Error in creating catalogue item", e);
+            LOG.error("Error in creating catalogue item", e);
         }
 
         return catalogueItem.getId();
@@ -176,7 +176,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             );
         }
         catch (Exception e) {
-            LOGGER.error("Error in fetching catalogue items for Id: " + catalogueId, e);
+            LOG.error("Error in fetching catalogue items for Id: " + catalogueId, e);
         }
 
         return catalogueItems;
@@ -190,7 +190,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<CatalogueItem> catalogueItemOp = catalogueItemRepo.findById(id);
 
             if(!catalogueItemOp.isPresent()) {
-                LOGGER.info("CatalogueCategory not found with id: " + id);
+                LOG.info("CatalogueCategory not found with id: " + id);
                 return null;
             }
 
@@ -203,7 +203,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             }
         }
         catch (Exception e) {
-            LOGGER.error("Failed to update CatalogueItem Id: " + id, e);
+            LOG.error("Failed to update CatalogueItem Id: " + id, e);
         }
 
         return catalogueItemDto;

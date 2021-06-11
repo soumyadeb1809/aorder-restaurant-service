@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/locations")
 public class LocationController {
 
-    private static final Logger LOGGER = LogManager.getLogger(LocationController.class);
+    private static final Logger LOG = LogManager.getLogger(LocationController.class);
 
     @Autowired
     private LocationService locationService;
