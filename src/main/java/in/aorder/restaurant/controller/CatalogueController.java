@@ -21,7 +21,7 @@ public class CatalogueController {
     @Autowired
     private CatalogueService catalogueService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResourceListResponse<CatalogueDto> getCatalogues(
             @RequestParam("restaurantId") Integer restaurantId
     ) {
@@ -34,7 +34,7 @@ public class CatalogueController {
         return response;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public CreateResourceResponse createCatalogue(
             @RequestBody CreateCatalogueRequest request
     ) {

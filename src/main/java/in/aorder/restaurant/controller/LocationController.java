@@ -19,7 +19,7 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @PostMapping
+    @PostMapping("/")
     public CreateResourceResponse createLocation(
             @RequestBody CreateLocationRequest request
     ) {
@@ -38,7 +38,7 @@ public class LocationController {
         return response;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public ResourceListResponse<LocationDto> getLocations() {
         ResourceListResponse<LocationDto> response = new ResourceListResponse<>();
 
