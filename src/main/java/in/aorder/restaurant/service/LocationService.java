@@ -2,6 +2,8 @@ package in.aorder.restaurant.service;
 
 import in.aorder.restaurant.dto.CreateLocationRequest;
 import in.aorder.restaurant.dto.LocationDto;
+import in.aorder.restaurant.dto.UpdateCatalogueItemRequest;
+import in.aorder.restaurant.dto.UpdateLocationRequest;
 
 import java.util.List;
 
@@ -29,4 +31,13 @@ public interface LocationService {
      * @return LocationDto for the location
      */
     LocationDto getLocation(Integer id);
+
+    /**
+     * Service to update an existing Location.
+     *
+     * @param id location id
+     * @param request dto
+     * @return updated LocationDto
+     */
+    LocationDto updateLocation(Integer id, UpdateLocationRequest request);
 }

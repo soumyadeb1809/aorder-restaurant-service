@@ -2,6 +2,7 @@ package in.aorder.restaurant.service;
 
 import in.aorder.restaurant.dto.CreateRestaurantRequest;
 import in.aorder.restaurant.dto.RestaurantDto;
+import in.aorder.restaurant.dto.UpdateRestaurantRequest;
 
 import java.util.List;
 
@@ -29,4 +30,12 @@ public interface RestaurantService {
      */
     RestaurantDto getRestaurant(Integer id);
 
+    /**
+     * Service to update an existing restaurant.
+     *
+     * @param id of the restaurant
+     * @param request dto
+     * @return updated RestaurantDto
+     */
+    RestaurantDto updateRestaurant(Integer id, UpdateRestaurantRequest request);
 }

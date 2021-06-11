@@ -23,6 +23,15 @@ public interface CatalogueService {
     List<CatalogueCategoryDto> getCategories(Integer restaurantId);
 
     /**
+     * Service to update an existing CatalogueCategory.
+     *
+     * @param id CatalogueCategory id
+     * @param request dto
+     * @return updated CatalogueCategoryDto
+     */
+    CatalogueCategoryDto updateCategory(Integer id, UpdateCatalogueCategoryRequest request);
+
+    /**
      * Service to create a new Catalogue.
      *
      * @param request dto
@@ -39,6 +48,15 @@ public interface CatalogueService {
     List<CatalogueDto> getCatalogues(Integer restaurantId);
 
     /**
+     * Service to update an existing Catalogue.
+     *
+     * @param id Catalogue id
+     * @param request dto
+     * @return updated CatalogueDto
+     */
+    CatalogueDto updateCatalogue(Integer id, UpdateCatalogueRequest request);
+
+    /**
      * Service to create a new CatalogueItem.
      *
      * @param request dto
@@ -53,4 +71,13 @@ public interface CatalogueService {
      * @return list of CatalogueDto
      */
     List<CatalogueItemDto> getCatalogueItems(Integer catalogueId);
+
+    /**
+     * Service to update an existing CatalogueItem.
+     *
+     * @param id CatalogueItem id
+     * @param request dto
+     * @return updated CatalogueItemDto
+     */
+    CatalogueItemDto updateCatalogueItem(Integer id, UpdateCatalogueItemRequest request);
 }

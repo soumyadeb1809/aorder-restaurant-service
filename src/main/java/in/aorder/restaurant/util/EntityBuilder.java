@@ -21,6 +21,39 @@ public class EntityBuilder {
         location.setLatLang(request.getLatLang());
     }
 
+    /**
+     * Utility method to update location instance with the request dto.
+     *
+     * @param location Location entity
+     * @param request UpdateLocationRequest dto
+     * @return count of updated properties
+     */
+    public static int update(Location location, UpdateLocationRequest request) {
+        int count = 0;
+
+        if(request.getName() != null) {
+            location.setName(request.getName());
+            count++;
+        }
+
+        if(request.getPin() != null) {
+            location.setPin(request.getPin());
+            count++;
+        }
+
+        if(request.getAddress() != null) {
+            location.setAddress(request.getAddress());
+            count++;
+        }
+
+        if(request.getLatLang() != null) {
+            location.setLatLang(request.getLatLang());
+            count++;
+        }
+
+        return count;
+    }
+
 
     /**
      * Utility method to build restaurant instance with the request dto.
@@ -36,6 +69,49 @@ public class EntityBuilder {
     }
 
     /**
+     * Utility method to update restaurant instance with the request dto.
+     *
+     * @param restaurant Restaurant Entity
+     * @param request UpdateRestaurantRequest dto
+     * @return count of updated properties
+     */
+    public static int update(Restaurant restaurant, UpdateRestaurantRequest request) {
+        int count = 0;
+
+        if(request.getName() != null) {
+            restaurant.setName(request.getName());
+            count++;
+        }
+
+        if(request.getDescription() != null) {
+            restaurant.setDescription(request.getDescription());
+            count++;
+        }
+
+        if(request.getLogoPath() != null) {
+            restaurant.setLogoPath(request.getLogoPath());
+            count++;
+        }
+
+        if(request.getLocationId() != null) {
+            restaurant.setLocationId(request.getLocationId());
+            count++;
+        }
+
+        if(request.getThemeId() != null) {
+            restaurant.setThemeId(request.getThemeId());
+            count++;
+        }
+
+        if(request.getQrId() != null) {
+            restaurant.setQrId(request.getQrId());
+            count++;
+        }
+
+        return count;
+    }
+
+    /**
      * Utility method to build CatalogueCategory instance with the request dto.
      *
      * @param category CatalogueCategory Entity
@@ -48,6 +124,29 @@ public class EntityBuilder {
     }
 
     /**
+     * Utility method to update CatalogueCategory instance with the request dto.
+     *
+     * @param category CatalogueCategory Entity
+     * @param request UpdateCatalogueCategoryRequest dto
+     * @return count of updated properties
+     */
+    public static int update(CatalogueCategory category, UpdateCatalogueCategoryRequest request) {
+        int count = 0;
+
+        if(category.getName() != null) {
+            category.setName(request.getName());
+            count++;
+        }
+
+        if(category.getDescription() != null) {
+            category.setDescription(request.getDescription());
+            count++;
+        }
+
+        return count;
+    }
+
+    /**
      * Utility method to build Catalogue instance with the request dto.
      *
      * @param catalogue Catalogue entity
@@ -56,6 +155,24 @@ public class EntityBuilder {
     public static void build(Catalogue catalogue, CreateCatalogueRequest request) {
         catalogue.setName(request.getName());
         catalogue.setRestaurantId(request.getRestaurantId());
+    }
+
+    /**
+     * Utility method to update Catalogue instance with the request dto.
+     *
+     * @param catalogue Catalogue entity
+     * @param request UpdateCatalogueRequest dto
+     * @return count of updated properties
+     */
+    public static int update(Catalogue catalogue, UpdateCatalogueRequest request) {
+        int count = 0;
+
+        if(catalogue.getName() != null) {
+            catalogue.setName(request.getName());
+            count++;
+        }
+
+        return count;
     }
 
     /**
@@ -74,4 +191,41 @@ public class EntityBuilder {
         catalogueItem.setRestaurantId(request.getRestaurantId());
     }
 
+    /**
+     * Utility method to build CatalogueItem instance with the request dto.
+     *
+     * @param catalogueItem CatalogueItem entity
+     * @param request CreateCatalogueItemRequest dto
+     * @return count of updated properties
+     */
+    public static int update(CatalogueItem catalogueItem, UpdateCatalogueItemRequest request) {
+        int count = 0;
+
+        if(request.getName() != null) {
+            catalogueItem.setName(request.getName());
+            count++;
+        }
+
+        if(request.getDescription() != null) {
+            catalogueItem.setDescription(request.getDescription());
+            count++;
+        }
+
+        if(request.getPrice() != null) {
+            catalogueItem.setPrice(request.getPrice());
+            count++;
+        }
+
+        if(request.getVegan() != null) {
+            catalogueItem.setVegan(request.getVegan());
+            count++;
+        }
+
+        if(request.getCategoryId() != null) {
+            catalogueItem.setCategoryId(request.getCategoryId());
+            count++;
+        }
+
+        return count;
+    }
 }

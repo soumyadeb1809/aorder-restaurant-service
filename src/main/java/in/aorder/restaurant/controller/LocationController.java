@@ -57,7 +57,33 @@ public class LocationController {
 
         LocationDto location = locationService.getLocation(id);
         response.setData(location);
-        response.setMessage(ResponseMessage.SUCCESS);
+
+        if(location != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
+    }
+
+    @PutMapping("/{id}")
+    public ResourceResponse<LocationDto> updateLocation(
+            @PathVariable("id") Integer id,
+            @RequestBody UpdateLocationRequest request
+    ) {
+        ResourceResponse<LocationDto> response = new ResourceResponse<>();
+
+        LocationDto location = locationService.updateLocation(id, request);
+        response.setData(location);
+
+        if(location != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
 
         return response;
     }

@@ -2,6 +2,7 @@ package in.aorder.restaurant.service.impl;
 
 import in.aorder.restaurant.dto.CreateRestaurantRequest;
 import in.aorder.restaurant.dto.RestaurantDto;
+import in.aorder.restaurant.dto.UpdateRestaurantRequest;
 import in.aorder.restaurant.entity.Restaurant;
 import in.aorder.restaurant.repository.RestaurantRepository;
 import in.aorder.restaurant.service.RestaurantService;
@@ -70,9 +71,39 @@ public class RestaurantServiceImpl implements RestaurantService {
             if(restaurant.isPresent()) {
                 restaurantDto = DtoFactory.createRestaurantDto(restaurant.get());
             }
+            else {
+                LOGGER.info("Restaurant not found with id: " + id);
+            }
         }
         catch (Exception e) {
             LOGGER.error("Error in fetching restaurant with Id: " + id, e);
+        }
+
+        return restaurantDto;
+    }
+
+    @Override
+    public RestaurantDto updateRestaurant(Integer id, UpdateRestaurantRequest request) {
+        RestaurantDto restaurantDto = null;
+
+        try {
+            Optional<Restaurant> restaurantOp = restaurantRepo.findById(id);
+
+            if(!restaurantOp.isPresent()) {
+                LOGGER.info("Restaurant not found with id: " + id);
+                return null;
+            }
+
+            Restaurant restaurant = restaurantOp.get();
+            int updateCount = EntityBuilder.update(restaurant, request);
+
+            if(updateCount != 0) {
+                restaurantRepo.save(restaurant);
+                restaurantDto = DtoFactory.createRestaurantDto(restaurant);
+            }
+        }
+        catch (Exception e) {
+            LOGGER.error("Failed to update Restaurant Id: " + id, e);
         }
 
         return restaurantDto;

@@ -59,14 +59,35 @@ public class RestaurantController {
 
        RestaurantDto restaurant = restaurantService.getRestaurant(id);
        response.setData(restaurant);
-       response.setMessage(ResponseMessage.SUCCESS);
+
+        if(restaurant != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
 
        return response;
     }
 
-    @PutMapping
-    public String updateRestaurant() {
-        return null;
+    @PutMapping("/{id}")
+    public ResourceResponse<RestaurantDto> updateRestaurant(
+            @PathVariable Integer id,
+            @RequestBody UpdateRestaurantRequest request
+    ) {
+        ResourceResponse<RestaurantDto> response = new ResourceResponse<>();
+
+        RestaurantDto restaurant = restaurantService.updateRestaurant(id, request);
+        response.setData(restaurant);
+
+        if(restaurant != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
     }
 
 }

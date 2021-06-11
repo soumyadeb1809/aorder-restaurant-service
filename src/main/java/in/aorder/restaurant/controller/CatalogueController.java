@@ -53,6 +53,26 @@ public class CatalogueController {
         return  response;
     }
 
+    @PutMapping("/{id}")
+    public ResourceResponse<CatalogueDto> updateCatalogue(
+            @PathVariable Integer id,
+            @RequestBody UpdateCatalogueRequest request
+    ) {
+        ResourceResponse<CatalogueDto> response = new ResourceResponse<>();
+
+        CatalogueDto catalogue = catalogueService.updateCatalogue(id, request);
+        response.setData(catalogue);
+
+        if(catalogue != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return  response;
+    }
+
     @GetMapping("/{id}/items")
     public ResourceListResponse<CatalogueItemDto> getCatalogueItems(
             @PathVariable("id") Integer id
@@ -88,6 +108,27 @@ public class CatalogueController {
         return  response;
     }
 
+    @PutMapping("/{id}/items/{itemId}")
+    public ResourceResponse<CatalogueItemDto> updateCatalogueItem(
+            @PathVariable("id") Integer catalogueId,
+            @PathVariable("itemId") Integer itemId,
+            @RequestBody UpdateCatalogueItemRequest request
+    ) {
+        ResourceResponse<CatalogueItemDto> response = new ResourceResponse<>();
+
+        CatalogueItemDto catalogueItem = catalogueService.updateCatalogueItem(itemId, request);
+        response.setData(catalogueItem);
+
+        if(catalogueItem != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return  response;
+    }
+
     @GetMapping("/categories")
     public ResourceListResponse<CatalogueCategoryDto> getCategories(
             @RequestParam("restaurantId") Integer restaurantId
@@ -115,6 +156,26 @@ public class CatalogueController {
         }
         else {
             response.setMessage(ResponseMessage.FAILED);
+        }
+
+        return response;
+    }
+
+    @PutMapping("/categories/{categoryId}")
+    public ResourceResponse<CatalogueCategoryDto> updateCategory(
+            @PathVariable("categoryId") Integer categoryId,
+            @RequestBody UpdateCatalogueCategoryRequest request
+    ) {
+        ResourceResponse<CatalogueCategoryDto> response = new ResourceResponse<>();
+
+        CatalogueCategoryDto catalogueCategory = catalogueService.updateCategory(categoryId, request);
+        response.setData(catalogueCategory);
+
+        if(catalogueCategory != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
         return response;
