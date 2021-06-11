@@ -39,7 +39,7 @@ public class LocationController {
     }
 
     @GetMapping
-    public ResourceListResponse<LocationDto> getLocation() {
+    public ResourceListResponse<LocationDto> getLocations() {
         ResourceListResponse<LocationDto> response = new ResourceListResponse<>();
 
         List<LocationDto> locations = locationService.getLocations();

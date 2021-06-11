@@ -41,7 +41,7 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public ResourceListResponse<RestaurantDto> getRestaurant() {
+    public ResourceListResponse<RestaurantDto> getRestaurants() {
 
         List<RestaurantDto> restaurants = restaurantService.getRestaurants();
         ResourceListResponse<RestaurantDto> response = new ResourceListResponse<>();
