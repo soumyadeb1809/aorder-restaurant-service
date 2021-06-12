@@ -12,8 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +36,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         try {
             EntityBuilder.build(restaurant, request);
             restaurantRepo.save(restaurant);
+            LOG.info("Created restaurant Id: " + restaurant.getId());
         }
         catch (Exception e) {
             LOG.error("Error in creating restaurant: ", e);
@@ -44,7 +45,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurant.getId();
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public List<RestaurantDto> getRestaurants() {
         List<RestaurantDto> restaurants = new ArrayList<>();
@@ -61,6 +62,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurants;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public RestaurantDto getRestaurant(Integer id) {
         RestaurantDto restaurantDto = null;
@@ -82,6 +84,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantDto;
     }
 
+    @Transactional
     @Override
     public RestaurantDto updateRestaurant(Integer id, UpdateRestaurantRequest request) {
         RestaurantDto restaurantDto = null;
@@ -96,9 +99,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
             Restaurant restaurant = restaurantOp.get();
             int updateCount = EntityBuilder.update(restaurant, request);
+            LOG.info("Updated properties count: " + updateCount);
 
             if(updateCount != 0) {
                 restaurantRepo.save(restaurant);
+                LOG.info("Updated restaurant Id: " + id);
                 restaurantDto = DtoFactory.createRestaurantDto(restaurant);
             }
         }
@@ -107,6 +112,29 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         return restaurantDto;
+    }
+
+    @Transactional
+    @Override
+    public Integer deleteRestaurant(Integer id) {
+        try {
+            Optional<Restaurant> restaurantOp = restaurantRepo.findById(id);
+
+            if(!restaurantOp.isPresent()) {
+                LOG.info("Restaurant not found with id: " + id);
+                return null;
+            }
+
+            Restaurant restaurant = restaurantOp.get();
+            restaurant.setDeleted(true);
+            restaurantRepo.save(restaurant);
+            LOG.info("Deleted restaurant Id: " + id);
+        }
+        catch (Exception e) {
+            LOG.error("Failed to delete Restaurant Id: " + id, e);
+        }
+
+        return id;
     }
 
 }

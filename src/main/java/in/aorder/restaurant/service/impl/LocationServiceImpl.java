@@ -36,7 +36,7 @@ public class LocationServiceImpl implements LocationService {
         try {
             EntityBuilder.build(location, request);
             locationRepo.save(location);
-            LOG.info("Created location: " + location.getId());
+            LOG.info("Created location Id: " + location.getId());
         }
         catch (Exception e) {
             LOG.error("Error in creating location: ", e);
@@ -78,7 +78,7 @@ public class LocationServiceImpl implements LocationService {
             }
         }
         catch (Exception e) {
-            LOG.error("Error in fetching location with ID: " + id, e);
+            LOG.error("Error in fetching location with Id: " + id, e);
         }
         return locationDto;
     }
@@ -99,12 +99,13 @@ public class LocationServiceImpl implements LocationService {
 
             Location location = locationOp.get();
             int updateCount = EntityBuilder.update(location, request);
+            LOG.info("Updated properties count: " + updateCount);
 
             if(updateCount != 0) {
                 locationRepo.save(location);
                 locationDto = DtoFactory.createLocationDto(location);
+                LOG.info("Updated location Id: " + id);
             }
-            LOG.info("Updated location: " + id);
         }
         catch (Exception e) {
             LOG.error("Failed to update location Id: " + id, e);
@@ -120,7 +121,7 @@ public class LocationServiceImpl implements LocationService {
             Optional<Location> locationOp = locationRepo.findById(id);
 
             if(!locationOp.isPresent()) {
-                LOG.info("Location not found with id: " + id);
+                LOG.info("Location not found with Id: " + id);
                 return null;
             }
 
@@ -128,7 +129,7 @@ public class LocationServiceImpl implements LocationService {
             location.setDeleted(true);
 
             locationRepo.save(location);
-            LOG.info("Deleted location: " + id);
+            LOG.info("Deleted location Id: " + id);
         }
         catch (Exception e) {
             LOG.error("Failed to delete location Id: " + id, e);

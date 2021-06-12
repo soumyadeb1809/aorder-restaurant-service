@@ -38,4 +38,12 @@ public interface RestaurantService {
      * @return updated RestaurantDto
      */
     RestaurantDto updateRestaurant(Integer id, UpdateRestaurantRequest request);
+
+    /**
+     * Service to update an existing restaurant.
+     *
+     * @param id of the restaurant
+     * @return id of the deleted restaurant
+     */
+    Integer deleteRestaurant(Integer id);
 }

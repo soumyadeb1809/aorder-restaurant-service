@@ -90,4 +90,23 @@ public class RestaurantController {
         return response;
     }
 
+    @DeleteMapping("/{id}")
+    public DeleteResourceResponse deleteRestaurant(
+            @PathVariable("id") Integer id
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        Integer deletedId = restaurantService.deleteRestaurant(id);
+        response.setId(deletedId);
+
+        if(id != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
+    }
+
 }
