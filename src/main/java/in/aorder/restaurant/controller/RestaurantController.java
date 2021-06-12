@@ -96,8 +96,8 @@ public class RestaurantController {
     ) {
         DeleteResourceResponse response = new DeleteResourceResponse();
 
-        Integer deletedId = restaurantService.deleteRestaurant(id);
-        response.setId(deletedId);
+        id = restaurantService.deleteRestaurant(id);
+        response.setId(id);
 
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);

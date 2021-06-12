@@ -26,9 +26,9 @@ public class LocationController {
         CreateResourceResponse response = new CreateResourceResponse();
 
         Integer id = locationService.createLocation(request);
+        response.setId(id);
 
         if(id != null) {
-            response.setId(id);
             response.setMessage(ResponseMessage.SUCCESS);
         }
         else {
@@ -94,10 +94,10 @@ public class LocationController {
     ) {
         DeleteResourceResponse response = new DeleteResourceResponse();
 
-        Integer deletedId = locationService.deleteLocation(id);
+        id = locationService.deleteLocation(id);
+        response.setId(id);
 
-        if(deletedId != null) {
-            response.setId(deletedId);
+        if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
         else {
