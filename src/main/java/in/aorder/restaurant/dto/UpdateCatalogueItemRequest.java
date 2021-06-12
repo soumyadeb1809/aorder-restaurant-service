@@ -13,4 +13,5 @@ public class UpdateCatalogueItemRequest {
     private Boolean vegan;
     private Double price;
     private Integer categoryId;
+    private Boolean visible;
 }

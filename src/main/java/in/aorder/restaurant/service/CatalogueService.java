@@ -32,6 +32,14 @@ public interface CatalogueService {
     CatalogueCategoryDto updateCategory(Integer id, UpdateCatalogueCategoryRequest request);
 
     /**
+     * Service to delete an existing CatalogueCategory.
+     *
+     * @param id CatalogueCategory id
+     * @return deleted CatalogueCategory id
+     */
+    Integer deleteCategory(Integer id);
+
+    /**
      * Service to create a new Catalogue.
      *
      * @param request dto
@@ -57,6 +65,14 @@ public interface CatalogueService {
     CatalogueDto updateCatalogue(Integer id, UpdateCatalogueRequest request);
 
     /**
+     * Service to delete an existing Catalogue.
+     *
+     * @param id Catalogue id
+     * @return deleted Catalogue id
+     */
+    Integer deleteCatalogue(Integer id);
+
+    /**
      * Service to create a new CatalogueItem.
      *
      * @param request dto
@@ -80,4 +96,12 @@ public interface CatalogueService {
      * @return updated CatalogueItemDto
      */
     CatalogueItemDto updateCatalogueItem(Integer id, UpdateCatalogueItemRequest request);
+
+    /**
+     * Service to delete an existing CatalogueItem.
+     *
+     * @param id CatalogueItem id
+     * @return deleted CatalogueItem id
+     */
+    Integer deleteCatalogueItem(Integer id);
 }

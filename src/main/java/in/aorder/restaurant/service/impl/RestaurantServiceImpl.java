@@ -104,8 +104,9 @@ public class RestaurantServiceImpl implements RestaurantService {
             if(updateCount != 0) {
                 restaurantRepo.save(restaurant);
                 LOG.info("Updated restaurant Id: " + id);
-                restaurantDto = DtoFactory.createRestaurantDto(restaurant);
             }
+
+            restaurantDto = DtoFactory.createRestaurantDto(restaurant);
         }
         catch (Exception e) {
             LOG.error("Failed to update Restaurant Id: " + id, e);

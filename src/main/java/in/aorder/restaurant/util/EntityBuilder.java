@@ -226,6 +226,11 @@ public class EntityBuilder {
             count++;
         }
 
+        if(request.getVisible() != null) {
+            catalogueItem.setVisible(request.getVisible());
+            count++;
+        }
+
         return count;
     }
 }

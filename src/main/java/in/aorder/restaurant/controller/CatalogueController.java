@@ -73,6 +73,25 @@ public class CatalogueController {
         return  response;
     }
 
+    @DeleteMapping("/{id}")
+    public DeleteResourceResponse deleteCatalogue(
+            @PathVariable("id") Integer id
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        id = catalogueService.deleteCatalogue(id);
+        response.setId(id);
+
+        if(id != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
+    }
+
     @GetMapping("/{id}/items")
     public ResourceListResponse<CatalogueItemDto> getCatalogueItems(
             @PathVariable("id") Integer id
@@ -129,6 +148,26 @@ public class CatalogueController {
         return  response;
     }
 
+    @DeleteMapping("/{id}/items/{itemId}")
+    public DeleteResourceResponse deleteCatalogueItem(
+            @PathVariable("id") Integer catalogueId,
+            @PathVariable("itemId") Integer itemId
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        itemId = catalogueService.deleteCatalogueItem(itemId);
+        response.setId(itemId);
+
+        if(itemId != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
+    }
+
     @GetMapping("/categories")
     public ResourceListResponse<CatalogueCategoryDto> getCategories(
             @RequestParam("restaurantId") Integer restaurantId
@@ -172,6 +211,25 @@ public class CatalogueController {
         response.setData(catalogueCategory);
 
         if(catalogueCategory != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
+    }
+
+    @DeleteMapping("/categories/{categoryId}")
+    public DeleteResourceResponse deleteCategory(
+            @PathVariable("categoryId") Integer categoryId
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        categoryId = catalogueService.deleteCategory(categoryId);
+        response.setId(categoryId);
+
+        if(categoryId != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
         else {

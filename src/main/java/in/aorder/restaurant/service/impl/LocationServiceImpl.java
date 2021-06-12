@@ -103,9 +103,10 @@ public class LocationServiceImpl implements LocationService {
 
             if(updateCount != 0) {
                 locationRepo.save(location);
-                locationDto = DtoFactory.createLocationDto(location);
                 LOG.info("Updated location Id: " + id);
             }
+
+            locationDto = DtoFactory.createLocationDto(location);
         }
         catch (Exception e) {
             LOG.error("Failed to update location Id: " + id, e);

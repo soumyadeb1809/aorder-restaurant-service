@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class CatalogueServiceImpl implements CatalogueService {
     @Autowired
     private CatalogueItemRepository catalogueItemRepo;
 
-
+    @Transactional
     @Override
     public Integer createCategory(CreateCatalogueCategoryRequest request) {
         CatalogueCategory category = new CatalogueCategory();
@@ -49,6 +50,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return category.getId();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CatalogueCategoryDto> getCategories(Integer restaurantId) {
         List<CatalogueCategoryDto> catalogueCategories = new ArrayList<>();
@@ -66,6 +68,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogueCategories;
     }
 
+    @Transactional
     @Override
     public CatalogueCategoryDto updateCategory(Integer id, UpdateCatalogueCategoryRequest request) {
         CatalogueCategoryDto categoryDto = null;
@@ -80,11 +83,14 @@ public class CatalogueServiceImpl implements CatalogueService {
 
             CatalogueCategory category = categoryOp.get();
             int updateCount = EntityBuilder.update(category, request);
+            LOG.info("Updated properties count: " + updateCount);
 
             if(updateCount != 0) {
                 categoryRepo.save(category);
-                categoryDto = DtoFactory.createCatalogueCategoryDto(category);
+                LOG.info("Updated CatalogueCategory Id: " + id);
             }
+
+            categoryDto = DtoFactory.createCatalogueCategoryDto(category);
         }
         catch (Exception e) {
             LOG.error("Failed to update CatalogueCategory Id: " + id, e);
@@ -93,6 +99,30 @@ public class CatalogueServiceImpl implements CatalogueService {
         return categoryDto;
     }
 
+    @Transactional
+    @Override
+    public Integer deleteCategory(Integer id) {
+        try {
+            Optional<CatalogueCategory> categoryOp = categoryRepo.findById(id);
+
+            if(!categoryOp.isPresent()) {
+                LOG.info("CatalogueCategory not found with id: " + id);
+                return null;
+            }
+
+            CatalogueCategory category = categoryOp.get();
+            category.setDeleted(true);
+            categoryRepo.save(category);
+            LOG.info("Deleted CatalogueCategory Id: " + id);
+        }
+        catch (Exception e) {
+            LOG.error("Failed to delete CatalogueCategory Id: " + id, e);
+        }
+
+        return id;
+    }
+
+    @Transactional
     @Override
     public Integer createCatalogue(CreateCatalogueRequest request) {
         Catalogue catalogue = new Catalogue();
@@ -108,6 +138,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogue.getId();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CatalogueDto> getCatalogues(Integer restaurantId) {
         List<CatalogueDto> catalogues = new ArrayList<>();
@@ -123,6 +154,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogues;
     }
 
+    @Transactional
     @Override
     public CatalogueDto updateCatalogue(Integer id, UpdateCatalogueRequest request) {
         CatalogueDto catalogueDto = null;
@@ -137,11 +169,14 @@ public class CatalogueServiceImpl implements CatalogueService {
 
             Catalogue catalogue = catalogueOp.get();
             int updateCount = EntityBuilder.update(catalogue, request);
+            LOG.info("Updated properties count: " + updateCount);
 
             if(updateCount != 0) {
                 catalogueRepo.save(catalogue);
-                catalogueDto = DtoFactory.createCatalogueDto(catalogue);
+                LOG.info("Updated Catalogue Id: " + id);
             }
+
+            catalogueDto = DtoFactory.createCatalogueDto(catalogue);
         }
         catch (Exception e) {
             LOG.error("Failed to update Catalogue Id: " + id, e);
@@ -150,6 +185,30 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogueDto;
     }
 
+    @Transactional
+    @Override
+    public Integer deleteCatalogue(Integer id) {
+        try {
+            Optional<Catalogue> catalogueOp = catalogueRepo.findById(id);
+
+            if(!catalogueOp.isPresent()) {
+                LOG.info("Catalogue not found with id: " + id);
+                return null;
+            }
+
+            Catalogue catalogue = catalogueOp.get();
+            catalogue.setDeleted(true);
+            catalogueRepo.save(catalogue);
+            LOG.info("Deleted Catalogue Id: " + id);
+        }
+        catch (Exception e) {
+            LOG.error("Failed to delete Catalogue Id: " + id, e);
+        }
+
+        return id;
+    }
+
+    @Transactional
     @Override
     public Integer createCatalogueItem(CreateCatalogueItemRequest request) {
         CatalogueItem catalogueItem = new CatalogueItem();
@@ -165,6 +224,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogueItem.getId();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CatalogueItemDto> getCatalogueItems(Integer catalogueId) {
         List<CatalogueItemDto> catalogueItems = new ArrayList<>();
@@ -182,6 +242,7 @@ public class CatalogueServiceImpl implements CatalogueService {
         return catalogueItems;
     }
 
+    @Transactional
     @Override
     public CatalogueItemDto updateCatalogueItem(Integer id, UpdateCatalogueItemRequest request) {
         CatalogueItemDto catalogueItemDto = null;
@@ -196,16 +257,42 @@ public class CatalogueServiceImpl implements CatalogueService {
 
             CatalogueItem catalogueItem = catalogueItemOp.get();
             int updateCount = EntityBuilder.update(catalogueItem, request);
+            LOG.info("Updated properties count: " + updateCount);
 
             if(updateCount != 0) {
                 catalogueItemRepo.save(catalogueItem);
-                catalogueItemDto = DtoFactory.createCatalogueItemDto(catalogueItem);
+                LOG.info("Updated CatalogueItem Id: " + id);
             }
+
+            catalogueItemDto = DtoFactory.createCatalogueItemDto(catalogueItem);
         }
         catch (Exception e) {
             LOG.error("Failed to update CatalogueItem Id: " + id, e);
         }
 
         return catalogueItemDto;
+    }
+
+    @Transactional
+    @Override
+    public Integer deleteCatalogueItem(Integer id) {
+        try {
+            Optional<CatalogueItem> catalogueItemOp = catalogueItemRepo.findById(id);
+
+            if(!catalogueItemOp.isPresent()) {
+                LOG.info("CatalogueItem not found with id: " + id);
+                return null;
+            }
+
+            CatalogueItem catalogueItem = catalogueItemOp.get();
+            catalogueItem.setDeleted(true);
+            catalogueItemRepo.save(catalogueItem);
+            LOG.info("Deleted CatalogueItem Id: " + id);
+        }
+        catch (Exception e) {
+            LOG.error("Failed to delete CatalogueItem Id: " + id, e);
+        }
+
+        return id;
     }
 }
