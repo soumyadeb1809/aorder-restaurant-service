@@ -40,4 +40,12 @@ public interface LocationService {
      * @return updated LocationDto
      */
     LocationDto updateLocation(Integer id, UpdateLocationRequest request);
+
+    /**
+     * Service to delete a new Location.
+     *
+     * @param id of the location
+     * @return Id of the deleted location
+     */
+    Integer deleteLocation(Integer id);
 }

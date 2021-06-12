@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class LocationServiceImpl implements LocationService {
     @Autowired
     private LocationRepository locationRepo;
 
-
+    @Transactional
     @Override
     public Integer createLocation(CreateLocationRequest request) {
 
@@ -35,6 +36,7 @@ public class LocationServiceImpl implements LocationService {
         try {
             EntityBuilder.build(location, request);
             locationRepo.save(location);
+            LOG.info("Created location: " + location.getId());
         }
         catch (Exception e) {
             LOG.error("Error in creating location: ", e);
@@ -43,7 +45,7 @@ public class LocationServiceImpl implements LocationService {
         return location.getId();
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public List<LocationDto> getLocations() {
         List<LocationDto> locations = new ArrayList<>();
@@ -59,7 +61,7 @@ public class LocationServiceImpl implements LocationService {
         return locations;
     }
 
-
+    @Transactional(readOnly = true)
     @Override
     public LocationDto getLocation(Integer id) {
 
@@ -81,6 +83,7 @@ public class LocationServiceImpl implements LocationService {
         return locationDto;
     }
 
+    @Transactional
     @Override
     public LocationDto updateLocation(Integer id, UpdateLocationRequest request) {
 
@@ -101,11 +104,36 @@ public class LocationServiceImpl implements LocationService {
                 locationRepo.save(location);
                 locationDto = DtoFactory.createLocationDto(location);
             }
+            LOG.info("Updated location: " + id);
         }
         catch (Exception e) {
             LOG.error("Failed to update location Id: " + id, e);
         }
 
         return locationDto;
+    }
+
+    @Transactional
+    @Override
+    public Integer deleteLocation(Integer id) {
+        try {
+            Optional<Location> locationOp = locationRepo.findById(id);
+
+            if(!locationOp.isPresent()) {
+                LOG.info("Location not found with id: " + id);
+                return null;
+            }
+
+            Location location = locationOp.get();
+            location.setDeleted(true);
+
+            locationRepo.save(location);
+            LOG.info("Deleted location: " + id);
+        }
+        catch (Exception e) {
+            LOG.error("Failed to delete location Id: " + id, e);
+        }
+
+        return id;
     }
 }

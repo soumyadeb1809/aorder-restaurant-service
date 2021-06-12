@@ -3,6 +3,7 @@ package in.aorder.restaurant.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "catalogue_category")
+@Where(clause = "deleted = false")
 public class CatalogueCategory extends BaseEntity {
 
     @Id

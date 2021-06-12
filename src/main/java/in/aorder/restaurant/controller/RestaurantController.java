@@ -20,7 +20,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
 
-    @PostMapping("/")
+    @PostMapping
     public CreateResourceResponse createRestaurant(
             @RequestBody CreateRestaurantRequest request
     ) {
@@ -40,7 +40,7 @@ public class RestaurantController {
         return response;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResourceListResponse<RestaurantDto> getRestaurants() {
 
         List<RestaurantDto> restaurants = restaurantService.getRestaurants();

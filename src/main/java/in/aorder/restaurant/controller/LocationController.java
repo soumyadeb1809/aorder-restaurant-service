@@ -19,7 +19,7 @@ public class LocationController {
     @Autowired
     private LocationService locationService;
 
-    @PostMapping("/")
+    @PostMapping
     public CreateResourceResponse createLocation(
             @RequestBody CreateLocationRequest request
     ) {
@@ -38,7 +38,7 @@ public class LocationController {
         return response;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResourceListResponse<LocationDto> getLocations() {
         ResourceListResponse<LocationDto> response = new ResourceListResponse<>();
 
@@ -79,6 +79,25 @@ public class LocationController {
         response.setData(location);
 
         if(location != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+        else {
+            response.setMessage(ResponseMessage.NOT_FOUND);
+        }
+
+        return response;
+    }
+
+    @DeleteMapping("/{id}")
+    public DeleteResourceResponse deleteLocation(
+            @PathVariable("id") Integer id
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        Integer deletedId = locationService.deleteLocation(id);
+
+        if(deletedId != null) {
+            response.setId(deletedId);
             response.setMessage(ResponseMessage.SUCCESS);
         }
         else {
