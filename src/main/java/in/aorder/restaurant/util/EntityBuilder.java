@@ -246,7 +246,7 @@ public class EntityBuilder {
     }
 
     /**
-     * Utility method to build CatalogueItem instance with the request dto.
+     * Utility method to update CatalogueItem instance with the request dto.
      *
      * @param catalogueItem CatalogueItem entity
      * @param request CreateCatalogueItemRequest dto
@@ -286,5 +286,19 @@ public class EntityBuilder {
         }
 
         return count;
+    }
+
+    /**
+     * Utility method to build FoodCourtRestaurant instance with provided params.
+     *
+     * @param fcRestaurant entity
+     * @param foodCourtId Id of the FoodCourt
+     * @param restaurantId Id of the Restaurant
+     */
+    public static void build(FoodCourtRestaurant fcRestaurant, Integer foodCourtId, Integer restaurantId) {
+        Restaurant restaurant = new Restaurant(restaurantId);
+        FoodCourt foodCourt = new FoodCourt(foodCourtId);
+        fcRestaurant.setFoodCourt(foodCourt);
+        fcRestaurant.setRestaurant(restaurant);
     }
 }

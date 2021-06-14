@@ -44,9 +44,6 @@ public class CatalogueController {
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
-        }
 
         return  response;
     }
@@ -64,9 +61,6 @@ public class CatalogueController {
         if(catalogue != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
         return  response;
     }
@@ -82,9 +76,6 @@ public class CatalogueController {
 
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
-        }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
         return response;
@@ -118,9 +109,6 @@ public class CatalogueController {
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
-        }
 
         return  response;
     }
@@ -139,9 +127,6 @@ public class CatalogueController {
         if(catalogueItem != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
         return  response;
     }
@@ -158,9 +143,6 @@ public class CatalogueController {
 
         if(itemId != null) {
             response.setMessage(ResponseMessage.SUCCESS);
-        }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
         return response;
@@ -192,9 +174,6 @@ public class CatalogueController {
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
-        }
 
         return response;
     }
@@ -212,9 +191,6 @@ public class CatalogueController {
         if(catalogueCategory != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
         return response;
     }
@@ -230,9 +206,6 @@ public class CatalogueController {
 
         if(categoryId != null) {
             response.setMessage(ResponseMessage.SUCCESS);
-        }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
         return response;

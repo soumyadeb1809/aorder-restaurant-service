@@ -61,9 +61,6 @@ public class LocationController {
         if(location != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
         return response;
     }
@@ -81,9 +78,6 @@ public class LocationController {
         if(location != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
         return response;
     }
@@ -99,9 +93,6 @@ public class LocationController {
 
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
-        }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
         return response;

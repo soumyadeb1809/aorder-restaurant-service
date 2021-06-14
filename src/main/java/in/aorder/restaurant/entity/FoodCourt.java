@@ -38,4 +38,8 @@ public class FoodCourt extends BaseEntity {
     @Column(name = "qr_id")
     private Integer qrId;
 
+    public FoodCourt(Integer id) {
+        this.id = id;
+    }
+
 }

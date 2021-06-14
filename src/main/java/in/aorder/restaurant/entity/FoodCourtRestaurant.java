@@ -18,7 +18,7 @@ public class FoodCourtRestaurant extends BaseEntity {
     @Id
     private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "food_court_id", nullable = false)
     private FoodCourt foodCourt;
 

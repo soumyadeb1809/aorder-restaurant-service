@@ -33,9 +33,6 @@ public class RestaurantController {
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
-        }
 
         return response;
     }
@@ -63,9 +60,6 @@ public class RestaurantController {
         if(restaurant != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
        return response;
     }
@@ -83,9 +77,6 @@ public class RestaurantController {
         if(restaurant != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
-        }
 
         return response;
     }
@@ -101,9 +92,6 @@ public class RestaurantController {
 
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
-        }
-        else {
-            response.setMessage(ResponseMessage.NOT_FOUND);
         }
 
         return response;

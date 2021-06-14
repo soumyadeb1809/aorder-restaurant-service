@@ -38,9 +38,6 @@ public class FoodCourtController {
         if(foodCourt != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
-        }
 
         return response;
     }
@@ -57,8 +54,22 @@ public class FoodCourtController {
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
+
+        return response;
+    }
+
+    @PutMapping("/{id}")
+    public ResourceResponse<FoodCourtDto> updateFoodCourt(
+            @PathVariable("id") Integer id,
+            @RequestBody UpdateFoodCourtRequest request
+    ) {
+        ResourceResponse<FoodCourtDto> response = new ResourceResponse<>();
+
+        FoodCourtDto foodCourt = fcService.updateFoodCourt(id, request);
+        response.setData(foodCourt);
+
+        if(foodCourt != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
         }
 
         return response;
@@ -76,8 +87,52 @@ public class FoodCourtController {
         if(id != null) {
             response.setMessage(ResponseMessage.SUCCESS);
         }
-        else {
-            response.setMessage(ResponseMessage.FAILED);
+
+        return response;
+    }
+
+    @PostMapping("/{id}/restaurants/{restaurantId}")
+    public CreateResourceResponse addRestaurant(
+            @PathVariable("id") Integer fcId,
+            @PathVariable("restaurantId") Integer restaurantId
+    ) {
+        CreateResourceResponse response = new CreateResourceResponse();
+
+        restaurantId = fcService.addRestaurant(fcId, restaurantId);
+        response.setId(restaurantId);
+
+        if(restaurantId != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/{id}/restaurants")
+    public ResourceListResponse<RestaurantDto> getRestaurants(
+            @PathVariable("id") Integer fcId
+    ) {
+        ResourceListResponse<RestaurantDto> response = new ResourceListResponse<>();
+
+        List<RestaurantDto> restaurants = fcService.getRestaurants(fcId);
+        response.setData(restaurants);
+        response.setMessage(ResponseMessage.SUCCESS);
+
+        return response;
+    }
+
+    @DeleteMapping("/{id}/restaurants/{restaurantId}")
+    public DeleteResourceResponse removeRestaurant(
+            @PathVariable("id") Integer fcId,
+            @PathVariable("restaurantId") Integer restaurantId
+    ) {
+        DeleteResourceResponse response = new DeleteResourceResponse();
+
+        restaurantId = fcService.removeRestaurant(fcId, restaurantId);
+        response.setId(restaurantId);
+
+        if(restaurantId != null) {
+            response.setMessage(ResponseMessage.SUCCESS);
         }
 
         return response;
