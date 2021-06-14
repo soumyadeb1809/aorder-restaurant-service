@@ -1,8 +1,6 @@
 package in.aorder.restaurant.controller;
 
 import in.aorder.restaurant.dto.*;
-import in.aorder.restaurant.entity.Catalogue;
-import in.aorder.restaurant.entity.CatalogueItem;
 import in.aorder.restaurant.model.ResponseMessage;
 import in.aorder.restaurant.service.CatalogueService;
 import org.apache.logging.log4j.LogManager;
@@ -168,26 +166,27 @@ public class CatalogueController {
         return response;
     }
 
-    @GetMapping("/categories")
+    @GetMapping("/{id}/categories")
     public ResourceListResponse<CatalogueCategoryDto> getCategories(
-            @RequestParam("restaurantId") Integer restaurantId
+            @PathVariable("id") Integer catalogueId
     ) {
         ResourceListResponse<CatalogueCategoryDto> response = new ResourceListResponse<>();
 
-        List<CatalogueCategoryDto> categories = catalogueService.getCategories(restaurantId);
+        List<CatalogueCategoryDto> categories = catalogueService.getCategories(catalogueId);
         response.setData(categories);
         response.setMessage(ResponseMessage.SUCCESS);
 
         return response;
     }
 
-    @PostMapping("/categories")
+    @PostMapping("/{id}/categories")
     public CreateResourceResponse createCategory(
+            @PathVariable("id") Integer catalogueId,
             @RequestBody CreateCatalogueCategoryRequest request
     ) {
         CreateResourceResponse response = new CreateResourceResponse();
 
-        Integer id = catalogueService.createCategory(request);
+        Integer id = catalogueService.createCategory(catalogueId, request);
         response.setId(id);
 
         if(id != null) {
@@ -200,7 +199,7 @@ public class CatalogueController {
         return response;
     }
 
-    @PutMapping("/categories/{categoryId}")
+    @PutMapping("/{id}/categories/{categoryId}")
     public ResourceResponse<CatalogueCategoryDto> updateCategory(
             @PathVariable("categoryId") Integer categoryId,
             @RequestBody UpdateCatalogueCategoryRequest request
@@ -220,7 +219,7 @@ public class CatalogueController {
         return response;
     }
 
-    @DeleteMapping("/categories/{categoryId}")
+    @DeleteMapping("/{id}/categories/{categoryId}")
     public DeleteResourceResponse deleteCategory(
             @PathVariable("categoryId") Integer categoryId
     ) {

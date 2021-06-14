@@ -58,7 +58,7 @@ public class DtoFactory {
         categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
         categoryDto.setDescription(category.getDescription());
-        categoryDto.setRestaurantId(category.getRestaurantId());
+        categoryDto.setCatalogueId(category.getCatalogueId());
 
         return categoryDto;
     }

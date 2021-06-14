@@ -11,5 +11,5 @@ public class CatalogueCategoryDto {
     private Integer id;
     private String name;
     private String description;
-    private Integer restaurantId;
+    private Integer catalogueId;
 }

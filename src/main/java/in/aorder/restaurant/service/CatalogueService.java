@@ -9,18 +9,19 @@ public interface CatalogueService {
     /**
      * Service to create a new CatalogueCategory.
      *
+     * @param catalogueId catalogue Id of the restaurant
      * @param request dto
      * @return Id of the created CatalogueCategory
      */
-    Integer createCategory(CreateCatalogueCategoryRequest request);
+    Integer createCategory(Integer catalogueId, CreateCatalogueCategoryRequest request);
 
     /**
      * Service to get the list of categories of a restaurant.
      *
-     * @param restaurantId of the restaurant
+     * @param catalogueId of the restaurant
      * @return list of CatalogueCategoryDto
      */
-    List<CatalogueCategoryDto> getCategories(Integer restaurantId);
+    List<CatalogueCategoryDto> getCategories(Integer catalogueId);
 
     /**
      * Service to update an existing CatalogueCategory.

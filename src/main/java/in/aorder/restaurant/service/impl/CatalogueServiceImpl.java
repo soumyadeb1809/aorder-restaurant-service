@@ -36,15 +36,16 @@ public class CatalogueServiceImpl implements CatalogueService {
 
     @Transactional
     @Override
-    public Integer createCategory(CreateCatalogueCategoryRequest request) {
+    public Integer createCategory(Integer catalogueId, CreateCatalogueCategoryRequest request) {
         CatalogueCategory category = new CatalogueCategory();
 
         try {
+            category.setCatalogueId(catalogueId);
             EntityBuilder.build(category, request);
             categoryRepo.save(category);
         }
         catch (Exception e) {
-            LOG.error("Error in creating category", e);
+            LOG.error("Error in creating category for catalogueId: " + catalogueId, e);
         }
 
         return category.getId();
@@ -52,17 +53,17 @@ public class CatalogueServiceImpl implements CatalogueService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<CatalogueCategoryDto> getCategories(Integer restaurantId) {
+    public List<CatalogueCategoryDto> getCategories(Integer catalogueId) {
         List<CatalogueCategoryDto> catalogueCategories = new ArrayList<>();
 
         try {
-            List<CatalogueCategory> categoryRecords = categoryRepo.findAll(restaurantId);
+            List<CatalogueCategory> categoryRecords = categoryRepo.findAll(catalogueId);
             categoryRecords.forEach(category ->
                     catalogueCategories.add(DtoFactory.createCatalogueCategoryDto(category))
             );
         }
         catch (Exception e) {
-            LOG.error("Error in fetching categories for restaurant Id: " + restaurantId, e);
+            LOG.error("Error in fetching categories for catalogueId: " + catalogueId, e);
         }
 
         return catalogueCategories;

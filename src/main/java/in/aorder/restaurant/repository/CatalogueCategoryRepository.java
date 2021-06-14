@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface CatalogueCategoryRepository extends JpaRepository<CatalogueCategory, Integer> {
 
-    @Query("FROM CatalogueCategory WHERE restaurantId = :restaurantId")
+    @Query("FROM CatalogueCategory WHERE catalogueId = :catalogueId")
     List<CatalogueCategory> findAll(
-            @Param("restaurantId") Integer restaurantId
+            @Param("catalogueId") Integer catalogueId
     );
 }

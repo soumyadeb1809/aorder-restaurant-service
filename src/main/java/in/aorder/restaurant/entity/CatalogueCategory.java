@@ -26,7 +26,7 @@ public class CatalogueCategory extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "restaurant_id", nullable = false)
-    private Integer restaurantId;
+    @Column(name = "catalogue_id", nullable = false)
+    private Integer catalogueId;
 
 }

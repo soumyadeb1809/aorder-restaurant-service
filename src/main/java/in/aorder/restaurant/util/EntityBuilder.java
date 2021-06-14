@@ -120,7 +120,6 @@ public class EntityBuilder {
     public static void build(CatalogueCategory category, CreateCatalogueCategoryRequest request) {
         category.setName(request.getName());
         category.setDescription(request.getDescription());
-        category.setRestaurantId(request.getRestaurantId());
     }
 
     /**
@@ -133,7 +132,7 @@ public class EntityBuilder {
     public static int update(CatalogueCategory category, UpdateCatalogueCategoryRequest request) {
         int count = 0;
 
-        if(category.getName() != null) {
+        if(request.getName() != null) {
             category.setName(request.getName());
             count++;
         }
