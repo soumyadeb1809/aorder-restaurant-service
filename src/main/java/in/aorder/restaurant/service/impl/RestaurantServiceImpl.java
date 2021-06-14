@@ -4,6 +4,7 @@ import in.aorder.restaurant.dto.CreateRestaurantRequest;
 import in.aorder.restaurant.dto.RestaurantDto;
 import in.aorder.restaurant.dto.UpdateRestaurantRequest;
 import in.aorder.restaurant.entity.Restaurant;
+import in.aorder.restaurant.exception.ResourceNotFoundException;
 import in.aorder.restaurant.repository.RestaurantRepository;
 import in.aorder.restaurant.service.RestaurantService;
 import in.aorder.restaurant.util.DtoFactory;
@@ -74,8 +75,11 @@ public class RestaurantServiceImpl implements RestaurantService {
                 restaurantDto = DtoFactory.createRestaurantDto(restaurant.get());
             }
             else {
-                LOG.info("Restaurant not found with id: " + id);
+                throw new ResourceNotFoundException("Restaurant not found with id: " + id);
             }
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Error in fetching restaurant with Id: " + id, e);
@@ -93,8 +97,7 @@ public class RestaurantServiceImpl implements RestaurantService {
             Optional<Restaurant> restaurantOp = restaurantRepo.findById(id);
 
             if(!restaurantOp.isPresent()) {
-                LOG.info("Restaurant not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("Restaurant not found with id: " + id);
             }
 
             Restaurant restaurant = restaurantOp.get();
@@ -107,6 +110,9 @@ public class RestaurantServiceImpl implements RestaurantService {
             }
 
             restaurantDto = DtoFactory.createRestaurantDto(restaurant);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to update Restaurant Id: " + id, e);
@@ -122,14 +128,16 @@ public class RestaurantServiceImpl implements RestaurantService {
             Optional<Restaurant> restaurantOp = restaurantRepo.findById(id);
 
             if(!restaurantOp.isPresent()) {
-                LOG.info("Restaurant not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("Restaurant not found with id: " + id);
             }
 
             Restaurant restaurant = restaurantOp.get();
             restaurant.setDeleted(true);
             restaurantRepo.save(restaurant);
             LOG.info("Deleted restaurant Id: " + id);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to delete Restaurant Id: " + id, e);

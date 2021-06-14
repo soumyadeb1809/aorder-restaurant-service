@@ -4,6 +4,7 @@ import in.aorder.restaurant.dto.*;
 import in.aorder.restaurant.entity.Catalogue;
 import in.aorder.restaurant.entity.CatalogueCategory;
 import in.aorder.restaurant.entity.CatalogueItem;
+import in.aorder.restaurant.exception.ResourceNotFoundException;
 import in.aorder.restaurant.repository.CatalogueCategoryRepository;
 import in.aorder.restaurant.repository.CatalogueItemRepository;
 import in.aorder.restaurant.repository.CatalogueRepository;
@@ -78,8 +79,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<CatalogueCategory> categoryOp = categoryRepo.findById(id);
 
             if(!categoryOp.isPresent()) {
-                LOG.info("CatalogueCategory not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("CatalogueCategory not found with id: " + id);
             }
 
             CatalogueCategory category = categoryOp.get();
@@ -92,6 +92,9 @@ public class CatalogueServiceImpl implements CatalogueService {
             }
 
             categoryDto = DtoFactory.createCatalogueCategoryDto(category);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to update CatalogueCategory Id: " + id, e);
@@ -107,14 +110,16 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<CatalogueCategory> categoryOp = categoryRepo.findById(id);
 
             if(!categoryOp.isPresent()) {
-                LOG.info("CatalogueCategory not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("CatalogueCategory not found with id: " + id);
             }
 
             CatalogueCategory category = categoryOp.get();
             category.setDeleted(true);
             categoryRepo.save(category);
             LOG.info("Deleted CatalogueCategory Id: " + id);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to delete CatalogueCategory Id: " + id, e);
@@ -164,8 +169,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<Catalogue> catalogueOp = catalogueRepo.findById(id);
 
             if(!catalogueOp.isPresent()) {
-                LOG.info("CatalogueCategory not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("CatalogueCategory not found with id: " + id);
             }
 
             Catalogue catalogue = catalogueOp.get();
@@ -178,6 +182,9 @@ public class CatalogueServiceImpl implements CatalogueService {
             }
 
             catalogueDto = DtoFactory.createCatalogueDto(catalogue);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to update Catalogue Id: " + id, e);
@@ -193,14 +200,16 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<Catalogue> catalogueOp = catalogueRepo.findById(id);
 
             if(!catalogueOp.isPresent()) {
-                LOG.info("Catalogue not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("Catalogue not found with id: " + id);
             }
 
             Catalogue catalogue = catalogueOp.get();
             catalogue.setDeleted(true);
             catalogueRepo.save(catalogue);
             LOG.info("Deleted Catalogue Id: " + id);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to delete Catalogue Id: " + id, e);
@@ -252,8 +261,7 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<CatalogueItem> catalogueItemOp = catalogueItemRepo.findById(id);
 
             if(!catalogueItemOp.isPresent()) {
-                LOG.info("CatalogueCategory not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("CatalogueCategory not found with id: " + id);
             }
 
             CatalogueItem catalogueItem = catalogueItemOp.get();
@@ -266,6 +274,9 @@ public class CatalogueServiceImpl implements CatalogueService {
             }
 
             catalogueItemDto = DtoFactory.createCatalogueItemDto(catalogueItem);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to update CatalogueItem Id: " + id, e);
@@ -281,14 +292,16 @@ public class CatalogueServiceImpl implements CatalogueService {
             Optional<CatalogueItem> catalogueItemOp = catalogueItemRepo.findById(id);
 
             if(!catalogueItemOp.isPresent()) {
-                LOG.info("CatalogueItem not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("CatalogueItem not found with id: " + id);
             }
 
             CatalogueItem catalogueItem = catalogueItemOp.get();
             catalogueItem.setDeleted(true);
             catalogueItemRepo.save(catalogueItem);
             LOG.info("Deleted CatalogueItem Id: " + id);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to delete CatalogueItem Id: " + id, e);

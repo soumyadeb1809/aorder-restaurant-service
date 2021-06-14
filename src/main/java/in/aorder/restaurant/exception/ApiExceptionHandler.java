@@ -19,16 +19,39 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final Logger LOG = LogManager.getLogger(ApiExceptionHandler.class);
 
+    /**
+     * Default exception handler for any uncaught exceptions.
+     *
+     * @param e Exception
+     * @param request WebRequest object
+     * @return ResponseEntity with ErrorResponse
+     */
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<Object> defaultExceptionHandler(Exception e, WebRequest request) {
+    public final ResponseEntity<Object> handleDefault(Exception e, WebRequest request) {
         List<String> details = new ArrayList<>();
-        details.add(e.getLocalizedMessage());
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setDetails(details);
+        details.add(e.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(details);
         errorResponse.setMessage(ResponseMessage.SERVER_ERROR);
-        LOG.error("Unexpected error", e);
 
+        LOG.error("Unexpected error", e);
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * Exception handler to handle ResourceNotFoundException.
+     *
+     * @param e Exception
+     * @return ResponseEntity with ErrorResponse
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public final ResponseEntity<Object> handleResourceNotFound(ResourceNotFoundException e) {
+        List<String> details = new ArrayList<>();
+        details.add(e.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse(details);
+        errorResponse.setMessage(ResponseMessage.NOT_FOUND);
+
+        LOG.error(e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 }

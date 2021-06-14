@@ -5,6 +5,7 @@ import in.aorder.restaurant.dto.LocationDto;
 import in.aorder.restaurant.dto.UpdateCatalogueItemRequest;
 import in.aorder.restaurant.dto.UpdateLocationRequest;
 import in.aorder.restaurant.entity.Location;
+import in.aorder.restaurant.exception.ResourceNotFoundException;
 import in.aorder.restaurant.repository.LocationRepository;
 import in.aorder.restaurant.service.LocationService;
 import in.aorder.restaurant.util.DtoFactory;
@@ -74,8 +75,11 @@ public class LocationServiceImpl implements LocationService {
                 locationDto = DtoFactory.createLocationDto(location.get());
             }
             else {
-                LOG.info("Location not found with id: " + id);
+                throw new ResourceNotFoundException("Location not found with id: " + id);
             }
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Error in fetching location with Id: " + id, e);
@@ -93,8 +97,7 @@ public class LocationServiceImpl implements LocationService {
             Optional<Location> locationOp = locationRepo.findById(id);
 
             if(!locationOp.isPresent()) {
-                LOG.info("Location not found with id: " + id);
-                return null;
+                throw new ResourceNotFoundException("Location not found with id: " + id);
             }
 
             Location location = locationOp.get();
@@ -107,6 +110,9 @@ public class LocationServiceImpl implements LocationService {
             }
 
             locationDto = DtoFactory.createLocationDto(location);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to update location Id: " + id, e);
@@ -122,8 +128,7 @@ public class LocationServiceImpl implements LocationService {
             Optional<Location> locationOp = locationRepo.findById(id);
 
             if(!locationOp.isPresent()) {
-                LOG.info("Location not found with Id: " + id);
-                return null;
+                throw new ResourceNotFoundException("Location not found with Id: " + id);
             }
 
             Location location = locationOp.get();
@@ -131,6 +136,9 @@ public class LocationServiceImpl implements LocationService {
 
             locationRepo.save(location);
             LOG.info("Deleted location Id: " + id);
+        }
+        catch (ResourceNotFoundException e) {
+            throw e;
         }
         catch (Exception e) {
             LOG.error("Failed to delete location Id: " + id, e);
