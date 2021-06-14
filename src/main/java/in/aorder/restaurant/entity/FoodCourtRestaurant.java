@@ -16,6 +16,8 @@ import javax.persistence.*;
 public class FoodCourtRestaurant extends BaseEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)
