@@ -29,6 +29,26 @@ public class DtoFactory {
     }
 
     /**
+     * Utility method to create FoodCourtDto from FoodCourt entity.
+     *
+     * @param foodCourt entity
+     * @return restaurantDto
+     */
+    public static FoodCourtDto createFoodCourtDto(FoodCourt foodCourt) {
+        FoodCourtDto foodCourtDto = new FoodCourtDto();
+
+        foodCourtDto.setId(foodCourt.getId());
+        foodCourtDto.setName(foodCourt.getName());
+        foodCourtDto.setDescription(foodCourt.getDescription());
+        foodCourtDto.setLogoPath(foodCourt.getLogoPath());
+        foodCourtDto.setLocationId(foodCourt.getLocationId());
+        foodCourtDto.setQrId(foodCourt.getQrId());
+        foodCourtDto.setThemeId(foodCourt.getThemeId());
+
+        return foodCourtDto;
+    }
+
+    /**
      * Utility method to create LocationDto from Location entity.
      *
      * @param location entity

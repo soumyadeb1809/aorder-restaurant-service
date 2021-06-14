@@ -54,7 +54,6 @@ public class EntityBuilder {
         return count;
     }
 
-
     /**
      * Utility method to build restaurant instance with the request dto.
      *
@@ -105,6 +104,62 @@ public class EntityBuilder {
 
         if(request.getQrId() != null) {
             restaurant.setQrId(request.getQrId());
+            count++;
+        }
+
+        return count;
+    }
+
+    /**
+     * Utility method to build FoodCourt instance with the request dto.
+     *
+     * @param foodCourt Restaurant Entity
+     * @param request CreateRestaurantRequest dto
+     */
+    public static void build(FoodCourt foodCourt, CreateFoodCourtRequest request) {
+        foodCourt.setName(request.getName());
+        foodCourt.setDescription(request.getDescription());
+        foodCourt.setLogoPath(request.getLogoPath());
+        foodCourt.setLocationId(request.getLocationId());
+    }
+
+    /**
+     * Utility method to update FoodCourt instance with the request dto.
+     *
+     * @param foodCourt Restaurant Entity
+     * @param request UpdateRestaurantRequest dto
+     * @return count of updated properties
+     */
+    public static int update(FoodCourt foodCourt, UpdateFoodCourtRequest request) {
+        int count = 0;
+
+        if(request.getName() != null) {
+            foodCourt.setName(request.getName());
+            count++;
+        }
+
+        if(request.getDescription() != null) {
+            foodCourt.setDescription(request.getDescription());
+            count++;
+        }
+
+        if(request.getLogoPath() != null) {
+            foodCourt.setLogoPath(request.getLogoPath());
+            count++;
+        }
+
+        if(request.getLocationId() != null) {
+            foodCourt.setLocationId(request.getLocationId());
+            count++;
+        }
+
+        if(request.getThemeId() != null) {
+            foodCourt.setThemeId(request.getThemeId());
+            count++;
+        }
+
+        if(request.getQrId() != null) {
+            foodCourt.setQrId(request.getQrId());
             count++;
         }
 
