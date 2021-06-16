@@ -1,4 +1,4 @@
-package in.aorder.restaurant.dto;
+package in.aorder.restaurant.dto.rest.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

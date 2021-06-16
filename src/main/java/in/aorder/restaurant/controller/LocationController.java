@@ -1,6 +1,12 @@
 package in.aorder.restaurant.controller;
 
-import in.aorder.restaurant.dto.*;
+import in.aorder.restaurant.dto.common.LocationDto;
+import in.aorder.restaurant.dto.rest.request.CreateLocationRequest;
+import in.aorder.restaurant.dto.rest.request.UpdateLocationRequest;
+import in.aorder.restaurant.dto.rest.response.CreateResourceResponse;
+import in.aorder.restaurant.dto.rest.response.DeleteResourceResponse;
+import in.aorder.restaurant.dto.rest.response.ResourceListResponse;
+import in.aorder.restaurant.dto.rest.response.ResourceResponse;
 import in.aorder.restaurant.model.ResponseMessage;
 import in.aorder.restaurant.service.LocationService;
 import org.apache.logging.log4j.LogManager;

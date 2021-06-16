@@ -1,8 +1,8 @@
 package in.aorder.restaurant.service.impl;
 
-import in.aorder.restaurant.dto.CreateRestaurantRequest;
-import in.aorder.restaurant.dto.RestaurantDto;
-import in.aorder.restaurant.dto.UpdateRestaurantRequest;
+import in.aorder.restaurant.dto.rest.request.CreateRestaurantRequest;
+import in.aorder.restaurant.dto.common.RestaurantDto;
+import in.aorder.restaurant.dto.rest.request.UpdateRestaurantRequest;
 import in.aorder.restaurant.entity.Restaurant;
 import in.aorder.restaurant.exception.ResourceNotFoundException;
 import in.aorder.restaurant.repository.RestaurantRepository;

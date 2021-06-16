@@ -1,9 +1,8 @@
 package in.aorder.restaurant.service.impl;
 
-import in.aorder.restaurant.dto.CreateLocationRequest;
-import in.aorder.restaurant.dto.LocationDto;
-import in.aorder.restaurant.dto.UpdateCatalogueItemRequest;
-import in.aorder.restaurant.dto.UpdateLocationRequest;
+import in.aorder.restaurant.dto.rest.request.CreateLocationRequest;
+import in.aorder.restaurant.dto.common.LocationDto;
+import in.aorder.restaurant.dto.rest.request.UpdateLocationRequest;
 import in.aorder.restaurant.entity.Location;
 import in.aorder.restaurant.exception.ResourceNotFoundException;
 import in.aorder.restaurant.repository.LocationRepository;

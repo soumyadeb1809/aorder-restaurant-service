@@ -1,6 +1,9 @@
 package in.aorder.restaurant.service;
 
-import in.aorder.restaurant.dto.*;
+import in.aorder.restaurant.dto.common.CatalogueCategoryDto;
+import in.aorder.restaurant.dto.common.CatalogueDto;
+import in.aorder.restaurant.dto.common.CatalogueItemDto;
+import in.aorder.restaurant.dto.rest.request.*;
 
 import java.util.List;
 

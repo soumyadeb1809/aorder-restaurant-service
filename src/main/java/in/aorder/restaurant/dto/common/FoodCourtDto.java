@@ -1,15 +1,18 @@
-package in.aorder.restaurant.dto;
+package in.aorder.restaurant.dto.common;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @Getter
 @Setter
-public class CreateFoodCourtRequest {
+@NoArgsConstructor
+public class FoodCourtDto {
+    private Integer id;
     private String name;
     private String description;
     private String logoPath;
+    private Integer themeId;
     private Integer locationId;
+    private Integer qrId;
 }

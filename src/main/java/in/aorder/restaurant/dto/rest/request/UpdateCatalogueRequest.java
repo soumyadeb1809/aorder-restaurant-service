@@ -1,4 +1,4 @@
-package in.aorder.restaurant.dto;
+package in.aorder.restaurant.dto.rest.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ResourceResponse<T> extends BaseResponse {
-    private T data;
+public class UpdateCatalogueRequest {
+    private String name;
 }

@@ -1,9 +1,9 @@
 package in.aorder.restaurant.service.impl;
 
-import in.aorder.restaurant.dto.CreateFoodCourtRequest;
-import in.aorder.restaurant.dto.FoodCourtDto;
-import in.aorder.restaurant.dto.RestaurantDto;
-import in.aorder.restaurant.dto.UpdateFoodCourtRequest;
+import in.aorder.restaurant.dto.rest.request.CreateFoodCourtRequest;
+import in.aorder.restaurant.dto.common.FoodCourtDto;
+import in.aorder.restaurant.dto.common.RestaurantDto;
+import in.aorder.restaurant.dto.rest.request.UpdateFoodCourtRequest;
 import in.aorder.restaurant.entity.FoodCourt;
 import in.aorder.restaurant.entity.FoodCourtRestaurant;
 import in.aorder.restaurant.exception.ResourceNotFoundException;

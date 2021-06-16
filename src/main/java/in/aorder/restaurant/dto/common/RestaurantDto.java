@@ -1,4 +1,4 @@
-package in.aorder.restaurant.dto;
+package in.aorder.restaurant.dto.common;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,9 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CatalogueCategoryDto {
+public class RestaurantDto {
     private Integer id;
     private String name;
     private String description;
-    private Integer catalogueId;
+    private String logoPath;
+    private Integer themeId;
+    private Integer locationId;
+    private Integer qrId;
 }

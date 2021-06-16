@@ -1,4 +1,4 @@
-package in.aorder.restaurant.dto;
+package in.aorder.restaurant.dto.rest.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateLocationRequest {
+public class UpdateLocationRequest {
     private String name;
     private String pin;
     private String latLang;

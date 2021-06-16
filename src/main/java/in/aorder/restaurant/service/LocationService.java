@@ -1,9 +1,8 @@
 package in.aorder.restaurant.service;
 
-import in.aorder.restaurant.dto.CreateLocationRequest;
-import in.aorder.restaurant.dto.LocationDto;
-import in.aorder.restaurant.dto.UpdateCatalogueItemRequest;
-import in.aorder.restaurant.dto.UpdateLocationRequest;
+import in.aorder.restaurant.dto.rest.request.CreateLocationRequest;
+import in.aorder.restaurant.dto.common.LocationDto;
+import in.aorder.restaurant.dto.rest.request.UpdateLocationRequest;
 
 import java.util.List;
 

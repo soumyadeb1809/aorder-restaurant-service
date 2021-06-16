@@ -1,4 +1,4 @@
-package in.aorder.restaurant.dto;
+package in.aorder.restaurant.dto.common;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CreateCatalogueItemRequest {
+public class CatalogueItemDto {
+    private Integer id;
     private String name;
     private String description;
     private Boolean vegan;
@@ -15,4 +16,5 @@ public class CreateCatalogueItemRequest {
     private Integer restaurantId;
     private Integer catalogueId;
     private Integer categoryId;
+    private Boolean visible;
 }

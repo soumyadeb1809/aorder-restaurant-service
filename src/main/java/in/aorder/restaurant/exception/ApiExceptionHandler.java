@@ -1,6 +1,6 @@
 package in.aorder.restaurant.exception;
 
-import in.aorder.restaurant.dto.ErrorResponse;
+import in.aorder.restaurant.dto.rest.response.ErrorResponse;
 import in.aorder.restaurant.model.ResponseMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

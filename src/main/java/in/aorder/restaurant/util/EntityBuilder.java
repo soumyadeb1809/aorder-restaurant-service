@@ -1,6 +1,6 @@
 package in.aorder.restaurant.util;
 
-import in.aorder.restaurant.dto.*;
+import in.aorder.restaurant.dto.rest.request.*;
 import in.aorder.restaurant.entity.*;
 
 /**
