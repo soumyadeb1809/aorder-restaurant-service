@@ -1,0 +1,27 @@
+# Server configs
+server:
+    port: 4568
+
+# Application configs
+app:
+    package:
+        base: in.aorder.restaurant
+        controller: ${app.package.base}.controller
+    api:
+        path-prefix: /api/rfs
+
+# Spring configs
+spring:
+    application:
+        name: restaurant-service
+    datasource:
+        password: password
+        url: jdbc:mysql://localhost:3306/aorder-db
+        username: root
+
+# Eureka configs
+eureka:
+    client:
+        register-with-eureka: true
+        service-url:
+            defaultZone: http://localhost:8761/eureka
