@@ -1,4 +1,4 @@
-package in.aorder.restaurant.model;
+package in.aorder.restaurant.constant;
 
 public class ResponseMessage {
     public static final String SUCCESS = "success";

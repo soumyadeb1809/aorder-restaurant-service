@@ -8,7 +8,7 @@ import in.aorder.restaurant.dto.rest.response.CreateResourceResponse;
 import in.aorder.restaurant.dto.rest.response.DeleteResourceResponse;
 import in.aorder.restaurant.dto.rest.response.ResourceListResponse;
 import in.aorder.restaurant.dto.rest.response.ResourceResponse;
-import in.aorder.restaurant.model.ResponseMessage;
+import in.aorder.restaurant.constant.ResponseMessage;
 import in.aorder.restaurant.service.CatalogueService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

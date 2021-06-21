@@ -1,6 +1,6 @@
 package in.aorder.restaurant.dto.rest.response;
 
-import in.aorder.restaurant.model.ResponseMessage;
+import in.aorder.restaurant.constant.ResponseMessage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
